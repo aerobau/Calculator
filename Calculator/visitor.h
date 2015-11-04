@@ -18,6 +18,7 @@ class Decimal;
 class Fraction;
 class Variable;
 class MultiplicationExpression;
+class AdditionExpression;
 typedef std::unique_ptr<MathElement> MathElementPtr;
 
 class Visitor {
@@ -27,6 +28,7 @@ class Visitor {
     virtual MathElementPtr VisitFraction(const Fraction*) const { return MathElementPtr(nullptr); }
     virtual MathElementPtr VisitVariable(const Variable*) const { return MathElementPtr(nullptr); };
     virtual MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const { return MathElementPtr(nullptr); };
+    virtual MathElementPtr VisitAdditionExpression(const AdditionExpression*) const { return MathElementPtr(nullptr); };
 };
 
 #endif // VISITOR_H_

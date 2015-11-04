@@ -17,6 +17,10 @@ class MathUtilities {
         return MathElementPtr(new Integer(1));
     }
     
+    static MathElementPtr NegativeOne() {
+        return MathElementPtr(new Integer(-1));
+    }
+    
     static MathElementPtr Zero() {
         return MathElementPtr(new Integer(0));
     }

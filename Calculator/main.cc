@@ -10,6 +10,8 @@
 #include "integer.h"
 #include "decimal.h"
 #include "fraction.h"
+#include "variable.h"
+#include "multiplication_expression.h"
 
 MathElementPtr Multiply(MathElementPtr first, MathElementPtr second) {
     return second->Accept(first->CreateMultiplicationVisitor());
@@ -28,7 +30,7 @@ MathElementPtr Subtract(MathElementPtr first, MathElementPtr second) {
 }
 
 int main(int argc, const char * argv[]) {
-    MathElementPtr first = MathElementPtr(new Integer(1));
+    MathElementPtr first = MathElementPtr(new Variable('y'));
     MathElementPtr second = MathElementPtr(new Variable('x'));
     MathElementPtr third = MathElementPtr(new Integer(5));
     

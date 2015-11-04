@@ -11,6 +11,8 @@
 #include "decimal.h"
 #include "fraction.h"
 #include "variable.h"
+#include "multiplication_expression.h"
+#include "addition_expression.h"
 
 IntegerEqualityVisitor::IntegerEqualityVisitor(const Integer* operand) : operand_(operand) {}
 
@@ -39,8 +41,53 @@ bool VariableEqualityVisitor::VisitVariable(const Variable* variable) const {
     return operand_->representation() == variable->representation();
 }
 
-MultiplicationExpressionEqualityVisitor::MultiplicationExpressionEqualityVisitor(const MultiplicationExpression* operand) : operand_(operand) {}
+MultiplicationExpressionEqualityVisitor::
+MultiplicationExpressionEqualityVisitor(const MultiplicationExpression* operand)
+    : operand_(operand) {}
 
-bool MultiplicationExpressionEqualityVisitor::VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
-    return false;
+bool MultiplicationExpressionEqualityVisitor::
+VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
+    if (operand_->NumberOfElements() == expression->NumberOfElements()) {
+        std::vector<MathElementPtr> cloned_operand_elements = operand_->ClonedElements();
+        std::vector<MathElementPtr> cloned_expression_elements = expression->ClonedElements();
+        for (int i = 0; i < cloned_operand_elements.size(); ++i) {
+            for (int j = 0; j < cloned_expression_elements.size(); ++j) {
+                if (cloned_operand_elements[i] == cloned_expression_elements[j]) {
+                    cloned_expression_elements.erase(cloned_expression_elements.begin() + j);
+                }
+            }
+        }
+        if (cloned_expression_elements.size() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+AdditionExpressionEqualityVisitor::
+AdditionExpressionEqualityVisitor(const AdditionExpression* operand) : operand_(operand) {}
+
+bool AdditionExpressionEqualityVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    if (operand_->NumberOfElements() == expression->NumberOfElements()) {
+        std::vector<MathElementPtr> cloned_operand_elements = operand_->ClonedElements();
+        std::vector<MathElementPtr> cloned_expression_elements = expression->ClonedElements();
+        for (int i = 0; i < cloned_operand_elements.size(); ++i) {
+            for (int j = 0; j < cloned_expression_elements.size(); ++j) {
+                if (cloned_operand_elements[i] == cloned_expression_elements[j]) {
+                    cloned_expression_elements.erase(cloned_expression_elements.begin() + j);
+                }
+            }
+        }
+        if (cloned_expression_elements.size() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }

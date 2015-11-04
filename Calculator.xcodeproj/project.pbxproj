@@ -18,6 +18,11 @@
 		D69866DA1BE6B76000C0B3A2 /* multiplication_expression_division_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866D81BE6B76000C0B3A2 /* multiplication_expression_division_visitor.cc */; settings = {ASSET_TAGS = (); }; };
 		D69866DD1BE6B7F800C0B3A2 /* multiplication_expression_addition_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866DB1BE6B7F800C0B3A2 /* multiplication_expression_addition_visitor.cc */; settings = {ASSET_TAGS = (); }; };
 		D69866E01BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866DE1BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.cc */; settings = {ASSET_TAGS = (); }; };
+		D69866E31BEA742800C0B3A2 /* addition_expression.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866E11BEA742800C0B3A2 /* addition_expression.cc */; settings = {ASSET_TAGS = (); }; };
+		D69866E61BEA7A7300C0B3A2 /* addition_expression_multiplication_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866E41BEA7A7300C0B3A2 /* addition_expression_multiplication_visitor.cc */; settings = {ASSET_TAGS = (); }; };
+		D69866E91BEA8BDB00C0B3A2 /* addition_expression_division_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866E71BEA8BDB00C0B3A2 /* addition_expression_division_visitor.cc */; settings = {ASSET_TAGS = (); }; };
+		D69866EC1BEA8CA100C0B3A2 /* addition_expression_addition_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866EA1BEA8CA100C0B3A2 /* addition_expression_addition_visitor.cc */; settings = {ASSET_TAGS = (); }; };
+		D69866EF1BEA8D0A00C0B3A2 /* addition_expression_subtraction_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866ED1BEA8D0A00C0B3A2 /* addition_expression_subtraction_visitor.cc */; settings = {ASSET_TAGS = (); }; };
 		D6ECFCA81BDFF45800D0618B /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = D6ECFCA71BDFF45800D0618B /* main.cc */; };
 		D6ECFCCA1BE420AC00D0618B /* integer_multiplication_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D6ECFCC81BE420AC00D0618B /* integer_multiplication_visitor.cc */; settings = {ASSET_TAGS = (); }; };
 		D6ECFCCD1BE422D800D0618B /* integer.cc in Sources */ = {isa = PBXBuildFile; fileRef = D6ECFCCB1BE422D800D0618B /* integer.cc */; settings = {ASSET_TAGS = (); }; };
@@ -71,6 +76,16 @@
 		D69866DC1BE6B7F800C0B3A2 /* multiplication_expression_addition_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = multiplication_expression_addition_visitor.h; sourceTree = "<group>"; };
 		D69866DE1BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = multiplication_expression_subtraction_visitor.cc; sourceTree = "<group>"; };
 		D69866DF1BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = multiplication_expression_subtraction_visitor.h; sourceTree = "<group>"; };
+		D69866E11BEA742800C0B3A2 /* addition_expression.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addition_expression.cc; sourceTree = "<group>"; };
+		D69866E21BEA742800C0B3A2 /* addition_expression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addition_expression.h; sourceTree = "<group>"; };
+		D69866E41BEA7A7300C0B3A2 /* addition_expression_multiplication_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addition_expression_multiplication_visitor.cc; sourceTree = "<group>"; };
+		D69866E51BEA7A7300C0B3A2 /* addition_expression_multiplication_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addition_expression_multiplication_visitor.h; sourceTree = "<group>"; };
+		D69866E71BEA8BDB00C0B3A2 /* addition_expression_division_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addition_expression_division_visitor.cc; sourceTree = "<group>"; };
+		D69866E81BEA8BDB00C0B3A2 /* addition_expression_division_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addition_expression_division_visitor.h; sourceTree = "<group>"; };
+		D69866EA1BEA8CA100C0B3A2 /* addition_expression_addition_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addition_expression_addition_visitor.cc; sourceTree = "<group>"; };
+		D69866EB1BEA8CA100C0B3A2 /* addition_expression_addition_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addition_expression_addition_visitor.h; sourceTree = "<group>"; };
+		D69866ED1BEA8D0A00C0B3A2 /* addition_expression_subtraction_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addition_expression_subtraction_visitor.cc; sourceTree = "<group>"; };
+		D69866EE1BEA8D0A00C0B3A2 /* addition_expression_subtraction_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addition_expression_subtraction_visitor.h; sourceTree = "<group>"; };
 		D6ECFCA41BDFF45800D0618B /* Calculator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Calculator; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6ECFCA71BDFF45800D0618B /* main.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
 		D6ECFCC21BE41C5100D0618B /* math_element.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = math_element.h; sourceTree = "<group>"; };
@@ -124,15 +139,17 @@
 			children = (
 				D6ECFCC21BE41C5100D0618B /* math_element.h */,
 				D6ECFCCC1BE422D800D0618B /* integer.h */,
-				D69866C21BE6742B00C0B3A2 /* variable.cc */,
-				D69866C31BE6742B00C0B3A2 /* variable.h */,
 				D6ECFCCB1BE422D800D0618B /* integer.cc */,
 				D6ECFCD21BE42A8A00D0618B /* decimal.h */,
 				D6ECFCD11BE42A8A00D0618B /* decimal.cc */,
 				D6ECFCD51BE42D0600D0618B /* fraction.h */,
 				D6ECFCD41BE42D0600D0618B /* fraction.cc */,
-				D69866D21BE6B08000C0B3A2 /* multiplication_expression.cc */,
+				D69866C31BE6742B00C0B3A2 /* variable.h */,
+				D69866C21BE6742B00C0B3A2 /* variable.cc */,
 				D69866D31BE6B08000C0B3A2 /* multiplication_expression.h */,
+				D69866D21BE6B08000C0B3A2 /* multiplication_expression.cc */,
+				D69866E21BEA742800C0B3A2 /* addition_expression.h */,
+				D69866E11BEA742800C0B3A2 /* addition_expression.cc */,
 			);
 			name = "Math Elements";
 			sourceTree = "<group>";
@@ -167,16 +184,18 @@
 		D6ECFCDD1BE434C900D0618B /* Subtraction Visitors */ = {
 			isa = PBXGroup;
 			children = (
-				D6ECFCDA1BE4335E00D0618B /* integer_subtraction_visitor.cc */,
 				D6ECFCDB1BE4335E00D0618B /* integer_subtraction_visitor.h */,
-				D6ECFCEB1BE44CD200D0618B /* decimal_subtraction_visitor.cc */,
+				D6ECFCDA1BE4335E00D0618B /* integer_subtraction_visitor.cc */,
 				D6ECFCEC1BE44CD200D0618B /* decimal_subtraction_visitor.h */,
-				D6ECFCF71BE4624C00D0618B /* fraction_subtraction_visitor.cc */,
+				D6ECFCEB1BE44CD200D0618B /* decimal_subtraction_visitor.cc */,
 				D6ECFCF81BE4624C00D0618B /* fraction_subtraction_visitor.h */,
-				D69866CE1BE67ACB00C0B3A2 /* variable_subtraction_visitor.cc */,
+				D6ECFCF71BE4624C00D0618B /* fraction_subtraction_visitor.cc */,
 				D69866CF1BE67ACB00C0B3A2 /* variable_subtraction_visitor.h */,
-				D69866DE1BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.cc */,
+				D69866CE1BE67ACB00C0B3A2 /* variable_subtraction_visitor.cc */,
 				D69866DF1BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.h */,
+				D69866DE1BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.cc */,
+				D69866EE1BEA8D0A00C0B3A2 /* addition_expression_subtraction_visitor.h */,
+				D69866ED1BEA8D0A00C0B3A2 /* addition_expression_subtraction_visitor.cc */,
 			);
 			name = "Subtraction Visitors";
 			sourceTree = "<group>";
@@ -184,16 +203,18 @@
 		D6ECFCDE1BE434E000D0618B /* Addition Visitors */ = {
 			isa = PBXGroup;
 			children = (
-				D6ECFCD71BE4322900D0618B /* integer_addition_visitor.cc */,
 				D6ECFCD81BE4322900D0618B /* integer_addition_visitor.h */,
-				D6ECFCE81BE44B6B00D0618B /* decimal_addition_visitor.cc */,
+				D6ECFCD71BE4322900D0618B /* integer_addition_visitor.cc */,
 				D6ECFCE91BE44B6B00D0618B /* decimal_addition_visitor.h */,
-				D6ECFCF41BE4612E00D0618B /* fraction_addition_visitor.cc */,
+				D6ECFCE81BE44B6B00D0618B /* decimal_addition_visitor.cc */,
 				D6ECFCF51BE4612E00D0618B /* fraction_addition_visitor.h */,
-				D69866CB1BE67A2F00C0B3A2 /* variable_addition_visitor.cc */,
+				D6ECFCF41BE4612E00D0618B /* fraction_addition_visitor.cc */,
 				D69866CC1BE67A2F00C0B3A2 /* variable_addition_visitor.h */,
-				D69866DB1BE6B7F800C0B3A2 /* multiplication_expression_addition_visitor.cc */,
+				D69866CB1BE67A2F00C0B3A2 /* variable_addition_visitor.cc */,
 				D69866DC1BE6B7F800C0B3A2 /* multiplication_expression_addition_visitor.h */,
+				D69866DB1BE6B7F800C0B3A2 /* multiplication_expression_addition_visitor.cc */,
+				D69866EB1BEA8CA100C0B3A2 /* addition_expression_addition_visitor.h */,
+				D69866EA1BEA8CA100C0B3A2 /* addition_expression_addition_visitor.cc */,
 			);
 			name = "Addition Visitors";
 			sourceTree = "<group>";
@@ -203,14 +224,16 @@
 			children = (
 				D6ECFCCF1BE425B400D0618B /* integer_division_visitor.h */,
 				D6ECFCCE1BE425B400D0618B /* integer_division_visitor.cc */,
-				D6ECFCE51BE44A1D00D0618B /* decimal_division_visitor.cc */,
 				D6ECFCE61BE44A1D00D0618B /* decimal_division_visitor.h */,
-				D6ECFCF11BE45F3600D0618B /* fraction_division_visitor.cc */,
+				D6ECFCE51BE44A1D00D0618B /* decimal_division_visitor.cc */,
 				D6ECFCF21BE45F3600D0618B /* fraction_division_visitor.h */,
-				D69866C81BE6791C00C0B3A2 /* variable_division_visitor.cc */,
+				D6ECFCF11BE45F3600D0618B /* fraction_division_visitor.cc */,
 				D69866C91BE6791C00C0B3A2 /* variable_division_visitor.h */,
-				D69866D81BE6B76000C0B3A2 /* multiplication_expression_division_visitor.cc */,
+				D69866C81BE6791C00C0B3A2 /* variable_division_visitor.cc */,
 				D69866D91BE6B76000C0B3A2 /* multiplication_expression_division_visitor.h */,
+				D69866D81BE6B76000C0B3A2 /* multiplication_expression_division_visitor.cc */,
+				D69866E81BEA8BDB00C0B3A2 /* addition_expression_division_visitor.h */,
+				D69866E71BEA8BDB00C0B3A2 /* addition_expression_division_visitor.cc */,
 			);
 			name = "Division Visitors";
 			sourceTree = "<group>";
@@ -220,14 +243,16 @@
 			children = (
 				D6ECFCC91BE420AC00D0618B /* integer_multiplication_visitor.h */,
 				D6ECFCC81BE420AC00D0618B /* integer_multiplication_visitor.cc */,
-				D6ECFCE21BE448C500D0618B /* decimal_multiplication_visitor.cc */,
 				D6ECFCE31BE448C500D0618B /* decimal_multiplication_visitor.h */,
-				D6ECFCEE1BE45BC600D0618B /* fraction_multiplication_visitor.cc */,
+				D6ECFCE21BE448C500D0618B /* decimal_multiplication_visitor.cc */,
 				D6ECFCEF1BE45BC600D0618B /* fraction_multiplication_visitor.h */,
-				D69866C51BE6775700C0B3A2 /* variable_multiplication_visitor.cc */,
+				D6ECFCEE1BE45BC600D0618B /* fraction_multiplication_visitor.cc */,
 				D69866C61BE6775700C0B3A2 /* variable_multiplication_visitor.h */,
-				D69866D51BE6B67A00C0B3A2 /* multiplication_expression_multiplication_visitor.cc */,
+				D69866C51BE6775700C0B3A2 /* variable_multiplication_visitor.cc */,
 				D69866D61BE6B67A00C0B3A2 /* multiplication_expression_multiplication_visitor.h */,
+				D69866D51BE6B67A00C0B3A2 /* multiplication_expression_multiplication_visitor.cc */,
+				D69866E51BEA7A7300C0B3A2 /* addition_expression_multiplication_visitor.h */,
+				D69866E41BEA7A7300C0B3A2 /* addition_expression_multiplication_visitor.cc */,
 			);
 			name = "Multiplication Visitors";
 			sourceTree = "<group>";
@@ -236,8 +261,8 @@
 			isa = PBXGroup;
 			children = (
 				D6ECFCC31BE41E1200D0618B /* visitor.h */,
-				D69866BF1BE66B0B00C0B3A2 /* equality_visitor.cc */,
 				D69866C01BE66B0B00C0B3A2 /* equality_visitor.h */,
+				D69866BF1BE66B0B00C0B3A2 /* equality_visitor.cc */,
 				D6ECFCE01BE434F900D0618B /* Multiplication Visitors */,
 				D6ECFCDF1BE434F000D0618B /* Division Visitors */,
 				D6ECFCDE1BE434E000D0618B /* Addition Visitors */,
@@ -305,9 +330,12 @@
 				D69866E01BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.cc in Sources */,
 				D69866D01BE67ACB00C0B3A2 /* variable_subtraction_visitor.cc in Sources */,
 				D6ECFCA81BDFF45800D0618B /* main.cc in Sources */,
+				D69866E91BEA8BDB00C0B3A2 /* addition_expression_division_visitor.cc in Sources */,
 				D6ECFCEA1BE44B6B00D0618B /* decimal_addition_visitor.cc in Sources */,
 				D69866DA1BE6B76000C0B3A2 /* multiplication_expression_division_visitor.cc in Sources */,
 				D6ECFCD61BE42D0600D0618B /* fraction.cc in Sources */,
+				D69866E61BEA7A7300C0B3A2 /* addition_expression_multiplication_visitor.cc in Sources */,
+				D69866EC1BEA8CA100C0B3A2 /* addition_expression_addition_visitor.cc in Sources */,
 				D69866CA1BE6791C00C0B3A2 /* variable_division_visitor.cc in Sources */,
 				D69866C11BE66B0B00C0B3A2 /* equality_visitor.cc in Sources */,
 				D6ECFCE41BE448C500D0618B /* decimal_multiplication_visitor.cc in Sources */,
@@ -318,9 +346,11 @@
 				D6ECFCCA1BE420AC00D0618B /* integer_multiplication_visitor.cc in Sources */,
 				D69866D41BE6B08000C0B3A2 /* multiplication_expression.cc in Sources */,
 				D6ECFCD31BE42A8A00D0618B /* decimal.cc in Sources */,
+				D69866EF1BEA8D0A00C0B3A2 /* addition_expression_subtraction_visitor.cc in Sources */,
 				D69866D71BE6B67A00C0B3A2 /* multiplication_expression_multiplication_visitor.cc in Sources */,
 				D6ECFCD01BE425B400D0618B /* integer_division_visitor.cc in Sources */,
 				D6ECFCD91BE4322900D0618B /* integer_addition_visitor.cc in Sources */,
+				D69866E31BEA742800C0B3A2 /* addition_expression.cc in Sources */,
 				D6ECFCCD1BE422D800D0618B /* integer.cc in Sources */,
 				D69866C41BE6742B00C0B3A2 /* variable.cc in Sources */,
 				D6ECFCF31BE45F3600D0618B /* fraction_division_visitor.cc in Sources */,

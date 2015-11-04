@@ -15,6 +15,7 @@ class Decimal;
 class Fraction;
 class Variable;
 class MultiplicationExpression;
+class AdditionExpression;
 
 class EqualityVisitor {
   public:
@@ -23,6 +24,7 @@ class EqualityVisitor {
     virtual bool VisitFraction(const Fraction*) const { return false; }
     virtual bool VisitVariable(const Variable*) const { return false; }
     virtual bool VisitMultiplicationExpression(const MultiplicationExpression*) const { return false; }
+    virtual bool VisitAdditionExpression(const AdditionExpression*) const { return false; }
 };
 
 class IntegerEqualityVisitor : public EqualityVisitor {
@@ -88,6 +90,19 @@ class MultiplicationExpressionEqualityVisitor: public EqualityVisitor {
     
     // EqualityVisitor overrides
     bool VisitMultiplicationExpression(const MultiplicationExpression*) const;
+};
+
+class AdditionExpressionEqualityVisitor: public EqualityVisitor {
+private:
+    // Storage for the first operand
+    const AdditionExpression* operand_;
+    
+public:
+    // Constructor
+    AdditionExpressionEqualityVisitor(const AdditionExpression*);
+    
+    // EqualityVisitor overrides
+    bool VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // EQUALITY_VISITOR_H_

@@ -83,3 +83,7 @@ std::vector<MathElementPtr> MultiplicationExpression::ClonedElements() const {
     return cloned_elements;
 }
 
+std::size_t MultiplicationExpression::NumberOfElements() const {
+    return elements_.size();
+}
+
