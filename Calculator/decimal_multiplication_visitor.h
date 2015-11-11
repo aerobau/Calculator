@@ -14,11 +14,16 @@
 #include "decimal.h"
 #include "fraction.h"
 #include "variable.h"
+#include "multiplication_expression.h"
+#include "addition_expression.h"
 
 class DecimalMultiplicationVisitor: public Visitor {
   private:
     // Storage for the first operand
     const Decimal* operand_;
+    
+    // Visitor specific helper
+    MathElementPtr DecimalResult(const MathElement*, const MathElement*) const;
     
   public:
     // Constructor
@@ -30,9 +35,7 @@ class DecimalMultiplicationVisitor: public Visitor {
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
-    
-    // Visitor specific helper
-    MathElementPtr DecimalResult(const MathElement*, const MathElement*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // DECIMAL_MULTIPLICATION_VISITOR_H_

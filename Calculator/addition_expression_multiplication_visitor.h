@@ -22,6 +22,9 @@ class AdditionExpressionMultiplicationVisitor : public Visitor {
     // Storage for the first operand
     const AdditionExpression* operand_;
     
+    // Class specific helper functions
+    MathElementPtr DistributeMultiply(const MathElement*) const;
+    
   public:
     // Constructor
     AdditionExpressionMultiplicationVisitor(const AdditionExpression*);
@@ -33,9 +36,6 @@ class AdditionExpressionMultiplicationVisitor : public Visitor {
     MathElementPtr VisitVariable(const Variable*) const;
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
     MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
-    
-    // Class specific functions
-    MathElementPtr DistributeMultiply(const MathElement*) const;
 };
 
 #endif // ADDITION_EXPRESSION_MULTIPLICATION_VISITOR_H_

@@ -38,12 +38,10 @@ MathElementPtr FractionMultiplicationVisitor::VisitDecimal(const Decimal* decima
 // Visit a Fraction
 MathElementPtr FractionMultiplicationVisitor::VisitFraction(const Fraction* fraction) const {
     // Multiplying the numerators
-    Visitor* operand_numerator_visitor = operand_->numerator()->CreateMultiplicationVisitor();
-    MathElementPtr result_num = fraction->denominator()->Accept(operand_numerator_visitor);
+    MathElementPtr result_num = Multiply(operand_->numerator(), fraction->numerator());
     
     // Multiplying the denominators
-    Visitor* operand_denominator_visitor = operand_->denominator()->CreateMultiplicationVisitor();
-    MathElementPtr result_den = fraction->denominator()->Accept(operand_denominator_visitor);
+    MathElementPtr result_den = Multiply(operand_->denominator(), fraction->denominator());
     
     // Constructing and returning a resulting Fraction
     return MathElementPtr(new Fraction(std::move(result_num), std::move(result_den)));
@@ -51,16 +49,23 @@ MathElementPtr FractionMultiplicationVisitor::VisitFraction(const Fraction* frac
 
 // Visit a Variable
 MathElementPtr FractionMultiplicationVisitor::VisitVariable(const Variable* variable) const {
-    return MathElementPtr(nullptr);
+    // Multiplying the numerator by the variable
+    MathElementPtr result_numerator = Multiply(operand_->numerator(), variable);
+    
+    // Returning the new fraction
+    return MathElementPtr(new Fraction(std::move(result_numerator), operand_->ClonedDenominator()));
 }
 
 // Visit a MultiplicationExpression
 MathElementPtr FractionMultiplicationVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
-    // getting the cloned elements from the expression and adding on the Fraction operand
-    std::vector<MathElementPtr> cloned_elements = expression->ClonedElements();
-    cloned_elements.push_back(operand_->Clone());
-    
-    // Constructing and returning a new MultiplicationExpression
-    return MathElementPtr(new MultiplicationExpression(std::move(cloned_elements)));
+    // Delegate to multiplication expression
+    return Multiply(expression, operand_);
+}
+
+// Visit an AdditionExpression
+MathElementPtr FractionMultiplicationVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    // Delegate to addition expression
+    return Multiply(expression, operand_);
 }

@@ -56,3 +56,9 @@ VisitMultiplicationExpression(const MultiplicationExpression* expression) const 
     // Allow MultiplicationExpressionMultiplicationVisitor to handle (see VisitInteger(...) method)
     return Multiply(expression, operand_);
 }
+
+MathElementPtr IntegerMultiplicationVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    // Allow AdditionExpressionMultiplicationVisitor to handle (see VisitInteger(...) method)
+    return Multiply(expression, operand_);
+}

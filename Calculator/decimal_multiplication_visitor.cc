@@ -47,6 +47,12 @@ VisitMultiplicationExpression(const MultiplicationExpression* expression) const 
     return DecimalResult(operand_, expression);
 }
 
+MathElementPtr DecimalMultiplicationVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    // return the resulting Decimal
+    return DecimalResult(operand_, expression);
+}
+
 // Calculate and return a unique ptr to a Decimal with the double values multiplied
 MathElementPtr DecimalMultiplicationVisitor::
 DecimalResult(const MathElement* first, const MathElement* second) const {

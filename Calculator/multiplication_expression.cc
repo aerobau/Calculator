@@ -11,6 +11,9 @@
 MultiplicationExpression::MultiplicationExpression(std::vector<MathElementPtr> elements)
 : elements_(std::move(elements)) {}
 
+MultiplicationExpression::MultiplicationExpression(MathElementPtr first, MathElementPtr second)
+: elements_({std::move(first), std::move(second)}) {}
+
 Visitor* MultiplicationExpression::CreateMultiplicationVisitor() const {
     return new MultiplicationExpressionMultiplicationVisitor(this);
 }

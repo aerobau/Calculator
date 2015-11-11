@@ -15,12 +15,16 @@
 #include "fraction.h"
 #include "variable.h"
 #include "multiplication_expression.h"
+#include "addition_expression.h"
 
 class MultiplicationExpressionMultiplicationVisitor : public Visitor {
   private:
     // Storage for the first operand
     const MultiplicationExpression* operand_;
     
+    // Class specific helpers
+    MathElementPtr AddElementToOperand(const MathElement*) const;
+    MathElementPtr AddElementsToOperand(const std::vector<MathElementPtr>*) const;
   public:
     // Constructor
     MultiplicationExpressionMultiplicationVisitor(const MultiplicationExpression*);
@@ -31,6 +35,7 @@ class MultiplicationExpressionMultiplicationVisitor : public Visitor {
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // MULTIPLICATION_EXPRESSION_MULTIPLICATION_VISITOR_H_

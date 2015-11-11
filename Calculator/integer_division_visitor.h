@@ -30,6 +30,7 @@ class IntegerDivisionVisitor: public Visitor {
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // INTEGER_DIVISION_VISITOR_H_

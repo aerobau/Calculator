@@ -47,6 +47,7 @@ protected:
     MathElementPtr Divide(const MathElement*, const MathElement*) const;
     MathElementPtr Add(const MathElement*, const MathElement*) const;
     MathElementPtr Subtract(const MathElement*, const MathElement*) const;
+    bool Equal(const MathElement*, const MathElement*) const;
 };
 
 #endif // VISITOR_H_

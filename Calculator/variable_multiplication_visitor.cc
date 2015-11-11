@@ -17,13 +17,8 @@ VariableMultiplicationVisitor::VariableMultiplicationVisitor(const Variable* ope
 
 // Visit an Integer
 MathElementPtr VariableMultiplicationVisitor::VisitInteger(const Integer* integer) const {
-    // Creating the vector of elements that will be used to construct a multiplication expression
-    std::vector<MathElementPtr> elements;
-    elements.push_back(operand_->Clone());
-    elements.push_back(integer->Clone());
-    
     // Constructs and returns a new MultiplicationExpression
-    return MathElementPtr(new MultiplicationExpression(std::move(elements)));
+    return MathElementPtr(new MultiplicationExpression(operand_->Clone(), integer->Clone()));
 }
 
 // Visit a Decimal
@@ -36,7 +31,7 @@ MathElementPtr VariableMultiplicationVisitor::VisitDecimal(const Decimal* decima
 // Visit a Fraction
 MathElementPtr VariableMultiplicationVisitor::VisitFraction(const Fraction* fraction) const {
     // Getting the new numerator by multiplying the fraction numerator with the variable
-    MathElementPtr result_numerator = fraction->numerator()->Accept(this);
+    MathElementPtr result_numerator = Multiply(operand_, fraction->numerator());
     
     // Constructing and returning a new Fraction
     return MathElementPtr(new Fraction(std::move(result_numerator), fraction->ClonedDenominator()));
@@ -44,23 +39,25 @@ MathElementPtr VariableMultiplicationVisitor::VisitFraction(const Fraction* frac
 
 // Visit a Variable
 MathElementPtr VariableMultiplicationVisitor::VisitVariable(const Variable* variable) const {
-    if (variable->Accept(operand_->CreateEqualityVisitor())) {
+    if (Equal(operand_, variable)) {
         // TODO: return an exponent
         return MathElementPtr(nullptr);
     } else {
         // Create and return new MultiplicationExpression with the two variables
-        std::vector<MathElementPtr> elements;
-        elements.push_back(operand_->Clone());
-        elements.push_back(variable->Clone());
-        return MathElementPtr(new MultiplicationExpression(std::move(elements)));
+        return MathElementPtr(new MultiplicationExpression(operand_->Clone(), variable->Clone()));
     }
 }
 
 // Visit a MultiplicationExpression
 MathElementPtr VariableMultiplicationVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
-    // Get the cloned elements, add the variable to them, and return a new MultiplicationExpression
-    std::vector<MathElementPtr> cloned_elements = expression->ClonedElements();
-    cloned_elements.push_back(operand_->Clone());
-    return MathElementPtr(new MultiplicationExpression(std::move(cloned_elements)));
+    // Allow MultiplicationExpressionMultiplicationVisitor to handle (see VisitVariable(...))
+    return Multiply(expression, operand_);
+}
+
+// Visit an AdditionExpression
+MathElementPtr VariableMultiplicationVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    // Allow AdditionExpressionMultiplicationVisitor to handle (see VisitVariable(...))
+    return Multiply(expression, operand_);
 }

@@ -20,8 +20,9 @@ class MultiplicationExpression : public MathElement {
     std::vector<MathElementPtr> elements_;
     
   public:
-    // Constructor
+    // Constructors
     explicit MultiplicationExpression(std::vector<MathElementPtr>);
+    MultiplicationExpression(MathElementPtr, MathElementPtr);
     
     // MathElement overrides
     Visitor* CreateMultiplicationVisitor() const;

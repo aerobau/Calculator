@@ -14,6 +14,8 @@
 #include "decimal.h"
 #include "fraction.h"
 #include "variable.h"
+#include "multiplication_expression.h"
+#include "addition_expression.h"
 
 class FractionMultiplicationVisitor : public Visitor {
   private:
@@ -30,6 +32,7 @@ class FractionMultiplicationVisitor : public Visitor {
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // FRACTION_MULTIPLICATION_VISITOR_H_

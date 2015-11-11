@@ -28,3 +28,8 @@ MathElementPtr Visitor::Add(const MathElement* first, const MathElement* second)
 MathElementPtr Visitor::Subtract(const MathElement* first, const MathElement* second) const {
     return second->Accept(first->CreateSubtractionVisitor());
 }
+
+// Check if two MathElements are equal using an equality visitor
+bool Visitor::Equal(const MathElement* first, const MathElement* second) const {
+    return second->Accept(first->CreateEqualityVisitor());
+}
