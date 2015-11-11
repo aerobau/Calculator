@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D68F1C491BF2DD17006FCFD0 /* visitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D68F1C481BF2DD17006FCFD0 /* visitor.cpp */; settings = {ASSET_TAGS = (); }; };
 		D69866C11BE66B0B00C0B3A2 /* equality_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866BF1BE66B0B00C0B3A2 /* equality_visitor.cc */; settings = {ASSET_TAGS = (); }; };
 		D69866C41BE6742B00C0B3A2 /* variable.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866C21BE6742B00C0B3A2 /* variable.cc */; settings = {ASSET_TAGS = (); }; };
 		D69866C71BE6775700C0B3A2 /* variable_multiplication_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866C51BE6775700C0B3A2 /* variable_multiplication_visitor.cc */; settings = {ASSET_TAGS = (); }; };
@@ -54,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D68F1C481BF2DD17006FCFD0 /* visitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = visitor.cpp; sourceTree = "<group>"; };
 		D69866BF1BE66B0B00C0B3A2 /* equality_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = equality_visitor.cc; sourceTree = "<group>"; };
 		D69866C01BE66B0B00C0B3A2 /* equality_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = equality_visitor.h; sourceTree = "<group>"; };
 		D69866C21BE6742B00C0B3A2 /* variable.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = variable.cc; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				D6ECFCC31BE41E1200D0618B /* visitor.h */,
+				D68F1C481BF2DD17006FCFD0 /* visitor.cpp */,
 				D69866C01BE66B0B00C0B3A2 /* equality_visitor.h */,
 				D69866BF1BE66B0B00C0B3A2 /* equality_visitor.cc */,
 				D6ECFCE01BE434F900D0618B /* Multiplication Visitors */,
@@ -329,6 +332,7 @@
 			files = (
 				D69866E01BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.cc in Sources */,
 				D69866D01BE67ACB00C0B3A2 /* variable_subtraction_visitor.cc in Sources */,
+				D68F1C491BF2DD17006FCFD0 /* visitor.cpp in Sources */,
 				D6ECFCA81BDFF45800D0618B /* main.cc in Sources */,
 				D69866E91BEA8BDB00C0B3A2 /* addition_expression_division_visitor.cc in Sources */,
 				D6ECFCEA1BE44B6B00D0618B /* decimal_addition_visitor.cc in Sources */,
