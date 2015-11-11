@@ -1,5 +1,5 @@
 //
-//  visitor.cpp
+//  visitor.cc
 //  Calculator
 //
 //  Created by Alexander Robau on 11/10/15.

@@ -53,10 +53,6 @@ MathElementPtr IntegerMultiplicationVisitor::VisitVariable(const Variable* varia
 // Visit a MultiplicationExpression
 MathElementPtr IntegerMultiplicationVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
-    // getting the cloned elements from the expression and adding the Integer operand
-    std::vector<MathElementPtr> cloned_elements = expression->ClonedElements();
-    cloned_elements.push_back(operand_->Clone());
-    
-    // Constructing and returning a new MultiplicationExpression
-    return MathElementPtr(new MultiplicationExpression(std::move(cloned_elements)));
+    // Allow MultiplicationExpressionMultiplicationVisitor to handle (see VisitInteger(...) method)
+    return Multiply(expression, operand_);
 }

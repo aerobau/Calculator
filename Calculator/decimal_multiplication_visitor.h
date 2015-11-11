@@ -30,6 +30,9 @@ class DecimalMultiplicationVisitor: public Visitor {
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    
+    // Visitor specific helper
+    MathElementPtr DecimalResult(const MathElement*, const MathElement*) const;
 };
 
 #endif // DECIMAL_MULTIPLICATION_VISITOR_H_

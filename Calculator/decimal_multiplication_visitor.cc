@@ -18,36 +18,39 @@ DecimalMultiplicationVisitor::DecimalMultiplicationVisitor(const Decimal* operan
 
 // Visit an integer
 MathElementPtr DecimalMultiplicationVisitor::VisitInteger(const Integer* integer) const {
-    // Getting the double value and constructing and returning a decimal
-    double result_value = operand_->DoubleValue() * integer->DoubleValue();
-    return MathElementPtr(new Decimal(result_value));
+    // Return the resulting Decimal
+    return DecimalResult(operand_, integer);
 }
 
 // Visit a decimal
 MathElementPtr DecimalMultiplicationVisitor::VisitDecimal(const Decimal* decimal) const {
-    // Getting the double value and constructing and returning a decimal
-    double result_value = operand_->DoubleValue() * decimal->DoubleValue();
-    return MathElementPtr(new Decimal(result_value));
+    // Return the resulting Decimal
+    return DecimalResult(operand_, decimal);
 }
 
 // Visit a fraction
 MathElementPtr DecimalMultiplicationVisitor::VisitFraction(const Fraction* fraction) const {
-    // Getting the double value and constructing and returning a decimal
-    double result_value = operand_->DoubleValue() * fraction->DoubleValue();
-    return MathElementPtr(new Decimal(result_value));
+    // Return the resulting Decimal
+    return DecimalResult(operand_, fraction);
 }
 
 // Visit a variable
 MathElementPtr DecimalMultiplicationVisitor::VisitVariable(const Variable* variable) const {
-    // Getting the double value and constructing and returning a decimal
-    double result_value = operand_->DoubleValue() * variable->DoubleValue();
-    return MathElementPtr(new Decimal(result_value));
+    // Return the resulting Decimal
+    return DecimalResult(operand_, variable);
 }
 
 // Visit a MultiplicationExpression
 MathElementPtr DecimalMultiplicationVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
+    // Return the resulting Decimal
+    return DecimalResult(operand_, expression);
+}
+
+// Calculate and return a unique ptr to a Decimal with the double values multiplied
+MathElementPtr DecimalMultiplicationVisitor::
+DecimalResult(const MathElement* first, const MathElement* second) const {
     // Getting the double value and constructing and returning a decimal
-    double result_value = operand_->DoubleValue() * expression->DoubleValue();
+    double result_value = first->DoubleValue() * second->DoubleValue();
     return MathElementPtr(new Decimal(result_value));
 }
