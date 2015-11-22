@@ -16,6 +16,9 @@
 AdditionExpression::AdditionExpression(std::vector<MathElementPtr> elements)
     : elements_(std::move(elements)) {}
 
+AdditionExpression::AdditionExpression(MathElementPtr first, MathElementPtr second)
+    : elements_({std::move(first), std::move(second)}) {}
+
 // MathElement overrides //
 
 // Visitor factory methods

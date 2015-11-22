@@ -8,6 +8,16 @@
 
 #include "integer_subtraction_visitor.h"
 
+// -- NEGATIVE FUNCTIONS -- //
+
+MathElementPtr IntegerSubtractionVisitor::AddNegation(const MathElement* element) const {
+    MathElementPtr negation = Multiply(MathUtilities::NegativeOne().get(), element);
+    return Add(operand_, negation.get());
+}
+
+// ++ PUBLIC FUNCTIONS ++ //
+
+// Constructor
 IntegerSubtractionVisitor::IntegerSubtractionVisitor(const Integer* operand) : operand_(operand) {}
 
 
@@ -38,5 +48,16 @@ MathElementPtr IntegerSubtractionVisitor::VisitFraction(const Fraction* fraction
 
 // Visit a Variable
 MathElementPtr IntegerSubtractionVisitor::VisitVariable(const Variable* variable) const {
-    return MathElementPtr(nullptr);
+    return AddNegation(variable);
+}
+
+// Visit a MultiplicationExpression
+MathElementPtr IntegerSubtractionVisitor::
+VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
+    return AddNegation(expression);
+}
+
+MathElementPtr IntegerSubtractionVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    return AddNegation(expression);
 }

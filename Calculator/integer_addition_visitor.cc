@@ -42,3 +42,16 @@ MathElementPtr IntegerAdditionVisitor::VisitFraction(const Fraction* fraction) c
 MathElementPtr IntegerAdditionVisitor::VisitVariable(const Variable* variable) const {
     return MathElementPtr(nullptr);
 }
+
+// Visit a MultiplicationExpression
+MathElementPtr IntegerAdditionVisitor::
+VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
+    return MathElementPtr(new AdditionExpression(operand_->Clone(), expression->Clone()));
+}
+
+// Visit an AdditionExpression
+MathElementPtr IntegerAdditionVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    // Allow expression to take care of it
+    return Add(expression, operand_);
+}

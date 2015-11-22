@@ -24,7 +24,12 @@ private:
 public:
     MultiplicationExpressionAdditionVisitor(const MultiplicationExpression*);
     
-    // TODO: Create Visitor functions (requires AdditionExpression)
+    MathElementPtr VisitInteger(const Integer*) const;
+    MathElementPtr VisitDecimal(const Decimal*) const;
+    MathElementPtr VisitFraction(const Fraction*) const;
+    MathElementPtr VisitVariable(const Variable*) const;
+    MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // MULTIPLICATION_EXPRESSION_ADDITION_VISITOR_H_

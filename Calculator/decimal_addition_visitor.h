@@ -20,6 +20,9 @@ class DecimalAdditionVisitor: public Visitor {
     // Storage for the first operand
     const Decimal* operand_;
     
+    // Specific function to get and return a decimal value
+    MathElementPtr DecimalValue(const MathElement*, const MathElement*) const;
+    
   public:
     // Constructor
     explicit DecimalAdditionVisitor(const Decimal*);
@@ -30,6 +33,8 @@ class DecimalAdditionVisitor: public Visitor {
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
+    
 };
 
 #endif // DECIMAL_ADDITION_VISITOR_H_

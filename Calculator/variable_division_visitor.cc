@@ -17,7 +17,7 @@ VariableDivisionVisitor::VariableDivisionVisitor(const Variable* operand) : oper
 
 // Visit an Integer
 MathElementPtr VariableDivisionVisitor::VisitInteger(const Integer* integer) const {
-    if (integer->Accept(MathUtilities::One()->CreateEqualityVisitor())) {
+    if (Equal(integer, MathUtilities::One().get())) {
         // The integer being divided by (visited) is equal to one, return the variable
         return operand_->Clone();
     } else {
@@ -35,7 +35,7 @@ MathElementPtr VariableDivisionVisitor::VisitDecimal(const Decimal* decimal) con
 // Visit a Fraction
 MathElementPtr VariableDivisionVisitor::VisitFraction(const Fraction* fraction) const {
     // Getting the result numerator by multiplying the variable by the denominator
-    MathElementPtr result_numerator = fraction->denominator()->Accept(this);
+    MathElementPtr result_numerator = Multiply(operand_, fraction->denominator());
     
     // Constructing and returning a fraction, putting the fraction numerator as the new denominator
     return MathElementPtr(new Fraction(std::move(result_numerator), fraction->ClonedNumerator()));
@@ -43,7 +43,7 @@ MathElementPtr VariableDivisionVisitor::VisitFraction(const Fraction* fraction) 
 
 // Visit a Variable
 MathElementPtr VariableDivisionVisitor::VisitVariable(const Variable* variable) const {
-    if (variable->Accept(operand_->CreateEqualityVisitor())) {
+    if (Equal(operand_, variable)) {
         // the variables are equal, one over another is simply 1
         return MathUtilities::One();
     } else {
@@ -56,5 +56,10 @@ MathElementPtr VariableDivisionVisitor::VisitVariable(const Variable* variable) 
 MathElementPtr VariableDivisionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
     // Construct and return a new Fraction
+    return MathElementPtr(new Fraction(operand_->Clone(), expression->Clone()));
+}
+
+MathElementPtr VariableDivisionVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
     return MathElementPtr(new Fraction(operand_->Clone(), expression->Clone()));
 }

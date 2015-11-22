@@ -17,11 +17,7 @@ FractionDivisionVisitor::FractionDivisionVisitor(const Fraction* operand) : oper
 
 // Visit an Integer
 MathElementPtr FractionDivisionVisitor::VisitInteger(const Integer* integer) const {
-    // Calculating the result denominator by dividing the operand denominator by the integer
-    MathElementPtr result_denominator = operand_->denominator()->Accept(this);
-    
-    // Constructing and returning the Fraction
-    return MathElementPtr(new Fraction(operand_->ClonedNumerator(), std::move(result_denominator)));
+    return MultiplyByOperandDenominator(integer);
 }
 
 // Visit a Decimal
@@ -34,31 +30,26 @@ MathElementPtr FractionDivisionVisitor::VisitDecimal(const Decimal* decimal) con
 // Visit a Fraction
 MathElementPtr FractionDivisionVisitor::VisitFraction(const Fraction* fraction) const {
     // Invert the fraction, then multiply
-    MathElementPtr inverted_fraction = fraction->invert();
+    MathElementPtr inverted_fraction = fraction->Invert();
     return inverted_fraction->Accept(operand_->CreateMultiplicationVisitor());
 }
 
 // Visit a Variable
 MathElementPtr FractionDivisionVisitor::VisitVariable(const Variable* variable) const {
-    // Getting the multiplication visitor for the denominator of the operand
-    Visitor* denominator_visit = operand_->denominator()->CreateMultiplicationVisitor();
-    
-    // Creating the result denominator by accepting the denominator visitor to multiply
-    MathElementPtr result_denominator = variable->Accept(denominator_visit);
-    
-    // Constructing and returning a new Fraction
-    return MathElementPtr(new Fraction(operand_->ClonedNumerator(), std::move(result_denominator)));
+    return MultiplyByOperandDenominator(variable);
 }
 
 // Visit a MultiplicationExpression
 MathElementPtr FractionDivisionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
-    // Getting the multiplication visitor for the denominator of the operand
-    Visitor* denominator_visit = operand_->denominator()->CreateMultiplicationVisitor();
+    return MultiplyByOperandDenominator(expression);
+}
+
+MathElementPtr FractionDivisionVisitor::
+MultiplyByOperandDenominator(const MathElement* element) const {
+    // Calculating the result denominator by multiplying the operand denominator by the element
+    MathElementPtr result_denominator = Multiply(operand_->denominator(), element);
     
-    // Creating the result denominator by accepting the denominator visitor to multiply
-    MathElementPtr result_denominator = expression->Accept(denominator_visit);
-    
-    // Constructing and returning a new Fraction
+    // Constructing and returning the Fraction
     return MathElementPtr(new Fraction(operand_->ClonedNumerator(), std::move(result_denominator)));
 }

@@ -8,14 +8,26 @@
 
 #include "fraction_subtraction_visitor.h"
 
+// -- PRIVATE FUNCTIONS -- //
+
+MathElementPtr FractionAdditionVisitor::
+MultiplyByDenominatorAndAdd(const MathElement* element) const {
+    // Multiplying by the denominator and adding to the operand numerator
+    MathElementPtr element_times_denominator = Multiply(element, operand_->denominator());
+    MathElementPtr result_numerator = Subtract(operand_->numerator(),
+                                               element_times_denominator.get());
+    
+    // Dividing the result to insure simplification
+    return Divide(result_numerator.get(), operand_->denominator());
+}
+
+// +++ PUBLIC FUNCTIONS ++ //
+
 FractionSubtractionVisitor::FractionSubtractionVisitor(const Fraction* operand)
     : operand_(operand) {}
 
 MathElementPtr FractionSubtractionVisitor::VisitInteger(const Integer* integer) const {
-    // Turn the integer into a fraction and subtract it from the fraction
-    MathElementPtr integer_as_fraction =
-        MathElementPtr(new Fraction(integer->Clone(), MathUtilities::One()));
-    return integer_as_fraction->Accept(this);
+    return MultiplyByDenominatorAndSubtract(integer);
 }
 
 MathElementPtr FractionSubtractionVisitor::VisitDecimal(const Decimal* decimal) const {
@@ -26,24 +38,29 @@ MathElementPtr FractionSubtractionVisitor::VisitDecimal(const Decimal* decimal) 
 
 MathElementPtr FractionSubtractionVisitor::VisitFraction(const Fraction* fraction) const {
     // Getting the common denominator by multiplying them.
-    Visitor* operand_denominator_mult = operand_->denominator()->CreateMultiplicationVisitor();
-    MathElementPtr common_denominator = fraction->denominator()->Accept(operand_denominator_mult);
+    MathElementPtr common_denominator = Multiply(operand_->denominator(), fraction->denominator());
     
-    // Getting the first numerator by multiplying the operand numerator by the fraction denominator
-    Visitor* operand_numerator_mult = operand_->numerator()->CreateMultiplicationVisitor();
-    MathElementPtr first_numerator = fraction->denominator()->Accept(operand_numerator_mult);
-    
-    // Getting the second numerator bu multiplying the fraction numerator by the operand denominator
-    MathElementPtr second_numerator = fraction->numerator()->Accept(operand_denominator_mult);
+    // Cross multiplying to get the numerators
+    MathElementPtr first_numerator = Multiply(operand_->numerator(), fraction->denominator());
+    MathElementPtr second_numerator = Multiply(fraction->numerator(), operand_->denominator());
     
     // Subtracting the first and second numerators
-    MathElementPtr sum_numerators = second_numerator->
-        Accept(first_numerator->CreateSubtractionVisitor());
+    MathElementPtr difference_numerators = Subtract(first_numerator.get(), second_numerator.get());
     
     // Constructing and returning a fraction
-    return MathElementPtr(new Fraction(std::move(sum_numerators), std::move(common_denominator)));
+    return Divide(difference_numerators.get(), common_denominator.get());
 }
 
 MathElementPtr FractionSubtractionVisitor::VisitVariable(const Variable* variable) const {
-    return MathElementPtr(nullptr);
+    return MultiplyByDenominatorAndSubtract(variable);
+}
+
+MathElementPtr FractionSubtractionVisitor::
+VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
+    return MultiplyByDenominatorAndSubtract(expression);
+}
+
+MathElementPtr FractionSubtractionVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    return MultiplyByDenominatorAndSubtract(expression);
 }

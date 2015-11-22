@@ -20,6 +20,8 @@ class DecimalDivisionVisitor: public Visitor {
     // Storage for the first operand
     const Decimal* operand_;
     
+    // Class specific method
+    MathElementPtr DecimalValue(const MathElement*, const MathElement*) const;
 public:
     // Constructor
     explicit DecimalDivisionVisitor(const Decimal*);
@@ -30,6 +32,7 @@ public:
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // DECIMAL_DIVISION_VISITOR_H_

@@ -26,7 +26,8 @@ public:
     MathElementPtr VisitDecimal(const Decimal*) const;
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
-    // TODO: Create VisitMultiplicationExpression (requires AdditionExpression)
+    MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // VARIABLE_ADDITION_VISITOR_H_

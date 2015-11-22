@@ -8,4 +8,50 @@
 
 #include "multiplication_expression_addition_visitor.h"
 
-MultiplicationExpressionAdditionVisitor::MultiplicationExpressionAdditionVisitor(const MultiplicationExpression* operand) : operand_(operand) {}
+// ++ PUBLIC FUNCTIONS ++ //
+
+// Constructor
+MultiplicationExpressionAdditionVisitor::
+MultiplicationExpressionAdditionVisitor(const MultiplicationExpression* operand)
+    : operand_(operand) {}
+
+// Visit an Integer
+MathElementPtr MultiplicationExpressionAdditionVisitor::VisitInteger(const Integer* integer) const {
+    return MathElementPtr(new AdditionExpression(operand_->Clone(), integer->Clone()));
+}
+
+// Visit a Decimal
+MathElementPtr MultiplicationExpressionAdditionVisitor::VisitDecimal(const Decimal* decimal) const {
+    double result_value = operand_->DoubleValue() + decimal->DoubleValue();
+    return MathElementPtr(new Decimal(result_value));
+}
+
+// Visit a Fraction
+MathElementPtr MultiplicationExpressionAdditionVisitor::
+VisitFraction(const Fraction* fraction) const {
+    return MathElementPtr(new AdditionExpression(operand_->Clone(), fraction->Clone()));
+}
+
+// Visit a Variable
+MathElementPtr MultiplicationExpressionAdditionVisitor::
+VisitVariable(const Variable* variable) const {
+    return MathElementPtr(new AdditionExpression(operand_->Clone(), variable->Clone()));
+}
+
+// Visit a m=MultiplicationExpression
+MathElementPtr MultiplicationExpressionAdditionVisitor::
+VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
+    if (Equal(operand_, expression)) {
+        return MathElementPtr(new MultiplicationExpression(MathUtilities::Two(),
+                                                           operand_->Clone()));
+    } else {
+        return MathElementPtr(new AdditionExpression(operand_->Clone(), expression->Clone()));
+    }
+}
+
+// Visit an AdditionExpression
+MathElementPtr MultiplicationExpressionAdditionVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    // Allow expression to handle
+    return Add(expression, operand_);
+}

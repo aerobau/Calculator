@@ -14,6 +14,8 @@
 #include "decimal.h"
 #include "fraction.h"
 #include "variable.h"
+#include "multiplication_expression.h"
+#include "addition_expression.h"
 
 class IntegerDivisionVisitor: public Visitor {
   private:

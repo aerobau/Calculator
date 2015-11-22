@@ -80,6 +80,6 @@ MathElementPtr Fraction::ClonedDenominator() const {
 }
 
 
-MathElementPtr Fraction::invert() const {
+MathElementPtr Fraction::Invert() const {
     return MathElementPtr(new Fraction(ClonedDenominator(), ClonedNumerator()));
 }

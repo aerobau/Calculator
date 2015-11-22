@@ -20,6 +20,8 @@ class FractionSubtractionVisitor : public Visitor {
     // Storage for the first operand
     const Fraction* operand_;
     
+    MathElementPtr MultiplyByDenominatorAndSubtract(const MathElement*) const;
+    
   public:
     // Constructor
     FractionSubtractionVisitor(const Fraction*);
@@ -29,6 +31,8 @@ class FractionSubtractionVisitor : public Visitor {
     MathElementPtr VisitDecimal(const Decimal*) const;
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
+    MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // FRACTION_SUBTRACTION_VISITOR_H_

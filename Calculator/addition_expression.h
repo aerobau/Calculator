@@ -18,7 +18,8 @@ private:
     
 public:
     // Constructor
-    AdditionExpression(std::vector<MathElementPtr>);
+    explicit AdditionExpression(std::vector<MathElementPtr>);
+    AdditionExpression(MathElementPtr, MathElementPtr);
     
     
     // MathElement overrides//

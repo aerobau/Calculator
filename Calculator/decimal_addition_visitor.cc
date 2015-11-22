@@ -8,6 +8,17 @@
 
 #include "decimal_addition_visitor.h"
 
+// -- PRIVATE FUNCTIONS -- //
+
+MathElementPtr DecimalAdditionVisitor::
+DecimalValue(const MathElement* first, const MathElement* second) const {
+    double result_value = first->DoubleValue() + second->DoubleValue();
+    return MathElementPtr(new Decimal(result_value));
+}
+
+// ++ PUBLIC FUNCTIONS ++ //
+
+// Constructor
 DecimalAdditionVisitor::DecimalAdditionVisitor(const Decimal* operand) : operand_(operand) {}
 
 // VISITING FUNCTIONS //
@@ -15,36 +26,31 @@ DecimalAdditionVisitor::DecimalAdditionVisitor(const Decimal* operand) : operand
 
 // Visit an Integer
 MathElementPtr DecimalAdditionVisitor::VisitInteger(const Integer* integer) const {
-    // Adding the double values and constructing and returning a Decimal
-    double result_value = operand_->DoubleValue() + integer->DoubleValue();
-    return MathElementPtr(new Decimal(result_value));
+    return DecimalValue(operand_, integer);
 }
 
 // Visit a Decimal
 MathElementPtr DecimalAdditionVisitor::VisitDecimal(const Decimal* decimal) const {
-    // Adding the double values and constructing and returning a Decimal
-    double result_value = operand_->DoubleValue() + decimal->DoubleValue();
-    return MathElementPtr(new Decimal(result_value));
+    return DecimalValue(operand_, decimal);
 }
 
 // Visit a Fraction
 MathElementPtr DecimalAdditionVisitor::VisitFraction(const Fraction* fraction) const {
-    // Adding the double values and constructing and returning a Decimal
-    double result_value = operand_->DoubleValue() + fraction->DoubleValue();
-    return MathElementPtr(new Decimal(result_value));
+    return DecimalValue(operand_, fraction);
 }
 
 // Visit a Variable
 MathElementPtr DecimalAdditionVisitor::VisitVariable(const Variable* variable) const {
-    // Adding the double values and constructing and returning a Decimal
-    double result_value = operand_->DoubleValue() + variable->DoubleValue();
-    return MathElementPtr(new Decimal(result_value));
+    return DecimalValue(operand_, variable);
 }
 
 // Visit a MultiplicationExpression
 MathElementPtr DecimalAdditionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
-    // Adding the double values and constructing and returning a Decimal
-    double result_value = operand_->DoubleValue() + expression->DoubleValue();
-    return MathElementPtr(new Decimal(result_value));
+    return DecimalValue(operand_, expression);
+}
+
+MathElementPtr DecimalAdditionVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    return DecimalValue(operand_, expression);
 }

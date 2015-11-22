@@ -49,7 +49,7 @@ class Fraction: public MathElement {
     MathElementPtr ClonedDenominator() const;
     
     // Cloning Inversion
-    MathElementPtr invert() const;
+    MathElementPtr Invert() const;
 };
 
 #endif // FRACTION_H_

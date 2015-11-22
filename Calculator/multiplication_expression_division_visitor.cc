@@ -50,3 +50,21 @@ VisitMultiplicationExpression(const MultiplicationExpression* expression) const 
     // Construct and return a new Fraction
     return MathElementPtr(new Fraction(operand_->Clone(), expression->Clone()));
 }
+
+// Visit an AdditionExpression
+MathElementPtr MultiplicationExpressionDivisionVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    // Check to see if any of the elements of the MultiplicationExpression operand are equal to the
+    // addition expression being divided by
+    for (unsigned int i = 0; i < operand_->elements()->size(); ++i) {
+        if (Equal(operand_->elements()->at(i).get(), expression)) {
+            // An equla one was found, simply remove it from the operand and return a new
+            // MultiplicationExpression withput the removed element.
+            std::vector<MathElementPtr> cloned_elements = operand_->ClonedElements();
+            cloned_elements.erase(cloned_elements.begin() + i);
+            return MathElementPtr(new MultiplicationExpression(std::move(cloned_elements)));
+        }
+    }
+    // No equal elements were found, ust make the fraction
+    return MathElementPtr(new Fraction(operand_->Clone(), expression->Clone()));
+}

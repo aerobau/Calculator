@@ -19,6 +19,8 @@ class IntegerSubtractionVisitor: public Visitor {
 private:
     const Integer* operand_;
     
+    MathElementPtr AddNegation(const MathElement*) const;
+    
 public:
     // Constructor
     IntegerSubtractionVisitor(const Integer*);
@@ -27,7 +29,8 @@ public:
     MathElementPtr VisitDecimal(const Decimal*) const;
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
-    // TODO: Create VisitMultiplicationExpression (requires AdditionExpression)
+    MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // INTEGER_SUBTRACTION_VISITOR_H_
