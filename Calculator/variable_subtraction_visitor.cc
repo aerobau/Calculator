@@ -33,7 +33,15 @@ MathElementPtr VariableSubtractionVisitor::VisitFraction(const Fraction* fractio
 }
 
 MathElementPtr VariableSubtractionVisitor::VisitVariable(const Variable* variable) const {
-    return AddNegation(variable);
+    if (Equal(operand_, variable)) {
+        return MathUtilities::Zero();
+    } else {
+        return AddNegation(variable);
+    }
+}
+
+MathElementPtr VariableSubtractionVisitor::VisitExponent(const Exponent* exponent) const {
+    return AddNegation(exponent);
 }
 
 MathElementPtr VariableSubtractionVisitor::

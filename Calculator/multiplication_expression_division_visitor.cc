@@ -33,7 +33,7 @@ MathElementPtr MultiplicationExpressionDivisionVisitor::VisitDecimal(const Decim
 MathElementPtr MultiplicationExpressionDivisionVisitor::
 VisitFraction(const Fraction* fraction) const {
     // Multiply by the denominator, make the numerator the denominator of new constructed fraction
-    MathElementPtr result_numerator = fraction->denominator()->Accept(this);
+    MathElementPtr result_numerator = Multiply(operand_, fraction->denominator());
     return MathElementPtr(new Fraction(std::move(result_numerator), fraction->ClonedNumerator()));
 }
 
@@ -42,6 +42,18 @@ MathElementPtr MultiplicationExpressionDivisionVisitor::
 VisitVariable(const Variable* variable) const {
     // Construct and return a new Fraction
     return MathElementPtr(new Fraction(operand_->Clone(), variable->Clone()));
+}
+
+// Visit an Exponent
+MathElementPtr MultiplicationExpressionDivisionVisitor::
+VisitExponent(const Exponent* exponent) const {
+    if (Equal(operand_, exponent->base())) {
+        MathElementPtr one_minus_exponent = Subtract(MathUtilities::One().get(),
+                                                     exponent->exponent());
+        return MathElementPtr(new Exponent(operand_->Clone(), one_minus_exponent->Clone()));
+    } else {
+        return MathElementPtr(new Fraction(operand_->Clone(), exponent->Clone()));
+    }
 }
 
 // Visit a MultiplicationExpression

@@ -9,15 +9,24 @@
 #ifndef EQUALTIY_VISITOR_H_
 #define EQUALTIY_VISITOR_H_
 
+#include <memory>
+
 class MathElement;
 class Integer;
 class Decimal;
 class Fraction;
 class Variable;
+class Exponent;
 class MultiplicationExpression;
 class AdditionExpression;
 
+class EqualityVisitor;
+typedef std::shared_ptr<EqualityVisitor> EqualityVisitorPtr;
+
 class EqualityVisitor {
+  protected:
+    bool Equal(const MathElement*, const MathElement*) const;
+    
   public:
     virtual bool VisitInteger(const Integer*) const { return false; }
     virtual bool VisitDecimal(const Decimal*) const { return false; }
@@ -77,6 +86,19 @@ public:
     
     // EqualityVisitor overrides
     bool VisitVariable(const Variable*) const;
+};
+
+class ExponentEqualityVisitor : public EqualityVisitor {
+private:
+    // Storage for the first operand
+    const Exponent* operand_;
+    
+public:
+    // Constructor
+    ExponentEqualityVisitor(const Exponent*);
+    
+    // EqualityVisitor overrides
+    bool VisitExponent(const Exponent*) const;
 };
 
 class MultiplicationExpressionEqualityVisitor: public EqualityVisitor {

@@ -10,31 +10,31 @@
 
 Variable::Variable(char representation) : representation_(representation) {}
 
-Visitor* Variable::CreateMultiplicationVisitor() const {
-    return new VariableMultiplicationVisitor(this);
+VisitorPtr Variable::CreateMultiplicationVisitor() const {
+    return VisitorPtr(new VariableMultiplicationVisitor(this));
 }
 
-Visitor* Variable::CreateDivisionVisitor() const {
-    return new VariableDivisionVisitor(this);
+VisitorPtr Variable::CreateDivisionVisitor() const {
+    return VisitorPtr(new VariableDivisionVisitor(this));
 }
 
-Visitor* Variable::CreateAdditionVisitor() const {
-    return new VariableAdditionVisitor(this);
+VisitorPtr Variable::CreateAdditionVisitor() const {
+    return VisitorPtr(new VariableAdditionVisitor(this));
 }
 
-Visitor* Variable::CreateSubtractionVisitor() const {
-    return new VariableSubtractionVisitor(this);
+VisitorPtr Variable::CreateSubtractionVisitor() const {
+    return VisitorPtr(new VariableSubtractionVisitor(this));
 }
 
-EqualityVisitor* Variable::CreateEqualityVisitor() const {
-    return new VariableEqualityVisitor(this);
+EqualityVisitorPtr Variable::CreateEqualityVisitor() const {
+    return EqualityVisitorPtr(new VariableEqualityVisitor(this));
 }
 
-MathElementPtr Variable::Accept(const Visitor* visitor) const {
+MathElementPtr Variable::Accept(const VisitorPtr visitor) const {
     return visitor->VisitVariable(this);
 }
 
-bool Variable::Accept(const EqualityVisitor* visitor) const {
+bool Variable::Accept(const EqualityVisitorPtr visitor) const {
     return visitor->VisitVariable(this);
 }
 

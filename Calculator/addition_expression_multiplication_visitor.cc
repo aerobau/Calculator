@@ -35,10 +35,18 @@ VisitFraction(const Fraction* fraction) const {
     return DistributeMultiply(fraction);
 }
 
+// Visit a Variable
 MathElementPtr AdditionExpressionMultiplicationVisitor::
 VisitVariable(const Variable* variable) const {
     // Constructing and returning a new AdditionExpression by distributing the visited element
     return DistributeMultiply(variable);
+}
+
+// Visit an Exponent
+MathElementPtr AdditionExpressionMultiplicationVisitor::
+VisitExponent(const Exponent* exponent) const {
+    // Allow Exponent to handle
+    return Multiply(exponent, operand_);
 }
 
 // Visit a MultiplicationExpression
@@ -51,8 +59,12 @@ VisitMultiplicationExpression(const MultiplicationExpression* expression) const 
 // Visit an AdditionExpression
 MathElementPtr AdditionExpressionMultiplicationVisitor::
 VisitAdditionExpression(const AdditionExpression* expression) const {
-    // Constructing and returning a new AdditionExpression by distributing the visited element
-    return DistributeMultiply(expression);
+    if (Equal(operand_, expression)) {
+        return MathElementPtr(new Exponent(operand_->Clone(), MathUtilities::Two()));
+    } else {
+        // Constructing and returning a new AdditionExpression by distributing the visited element
+        return DistributeMultiply(expression);
+    }
 }
 
 
@@ -69,8 +81,7 @@ DistributeMultiply(const MathElement* distributing_element) const {
     // addition expression operand by the integer being visited
     std::vector<MathElementPtr> result_elements;
     for (int i = 0; i < elements->size(); ++i) {
-        Visitor* visitor = elements->at(i)->CreateMultiplicationVisitor();
-        result_elements.push_back(distributing_element->Accept(visitor));
+        result_elements.push_back(Multiply(elements->at(i).get(), distributing_element));
     }
     
     // Constructing and returning a new AdditionExpression

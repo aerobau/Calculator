@@ -39,9 +39,26 @@ MathElementPtr FractionDivisionVisitor::VisitVariable(const Variable* variable) 
     return MultiplyByOperandDenominator(variable);
 }
 
+// Visit an Exponent
+MathElementPtr FractionDivisionVisitor::VisitExponent(const Exponent* exponent) const {
+    if (Equal(operand_, exponent->base())) {
+        MathElementPtr one_minus_exponent = Subtract(MathUtilities::One().get(),
+                                                     exponent->exponent());
+        return MathElementPtr(new Exponent(operand_->Clone(), one_minus_exponent->Clone()));
+    } else {
+        return MultiplyByOperandDenominator(exponent);
+    }
+}
+
 // Visit a MultiplicationExpression
 MathElementPtr FractionDivisionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
+    return MultiplyByOperandDenominator(expression);
+}
+
+// Visit an AdditionExpression
+MathElementPtr FractionDivisionVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
     return MultiplyByOperandDenominator(expression);
 }
 

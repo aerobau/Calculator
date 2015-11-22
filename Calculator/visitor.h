@@ -12,14 +12,17 @@
 #include <memory>
 #include <vector>
 
+class Visitor;
 class MathElement;
 class Integer;
 class Decimal;
 class Fraction;
 class Variable;
+class Exponent;
 class MultiplicationExpression;
 class AdditionExpression;
 typedef std::unique_ptr<MathElement> MathElementPtr;
+typedef std::shared_ptr<Visitor> VisitorPtr;
 
 class Visitor {
   public:
@@ -34,6 +37,7 @@ class Visitor {
     virtual MathElementPtr VisitDecimal(const Decimal*) const { return MathElementPtr(nullptr); }
     virtual MathElementPtr VisitFraction(const Fraction*) const { return MathElementPtr(nullptr); }
     virtual MathElementPtr VisitVariable(const Variable*) const { return MathElementPtr(nullptr); };
+    virtual MathElementPtr VisitExponent(const Exponent*) const { return MathElementPtr(nullptr); };
     virtual MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const { return MathElementPtr(nullptr); };
     virtual MathElementPtr VisitAdditionExpression(const AdditionExpression*) const { return MathElementPtr(nullptr); };
     

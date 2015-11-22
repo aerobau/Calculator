@@ -37,6 +37,10 @@ MathElementPtr AdditionExpressionSubtractionVisitor::VisitVariable(const Variabl
     return AddNegation(variable);
 }
 
+MathElementPtr AdditionExpressionSubtractionVisitor::VisitExponent(const Exponent* exponent) const {
+    return AddNegation(exponent);
+}
+
 MathElementPtr AdditionExpressionSubtractionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
     return AddNegation(expression);
@@ -44,5 +48,9 @@ VisitMultiplicationExpression(const MultiplicationExpression* expression) const 
 
 MathElementPtr AdditionExpressionSubtractionVisitor::
 VisitAdditionExpression(const AdditionExpression* expression) const {
-    return AddNegation(expression);
+    if (Equal(operand_, expression)) {
+        return MathUtilities::Zero();
+    } else {
+        return AddNegation(expression);
+    }
 }

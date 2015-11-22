@@ -17,39 +17,42 @@ AdditionExpression::AdditionExpression(std::vector<MathElementPtr> elements)
     : elements_(std::move(elements)) {}
 
 AdditionExpression::AdditionExpression(MathElementPtr first, MathElementPtr second)
-    : elements_({std::move(first), std::move(second)}) {}
+: elements_(std::vector<MathElementPtr>()) {
+    elements_.push_back(std::move(first));
+    elements_.push_back(std::move(second));
+}
 
 // MathElement overrides //
 
 // Visitor factory methods
 
-Visitor* AdditionExpression::CreateMultiplicationVisitor() const {
-    return new AdditionExpressionMultiplicationVisitor(this);
+VisitorPtr AdditionExpression::CreateMultiplicationVisitor() const {
+    return VisitorPtr(new AdditionExpressionMultiplicationVisitor(this));
 }
 
-Visitor* AdditionExpression::CreateDivisionVisitor() const {
-    return new AdditionExpressionDivisionVisitor(this);
+VisitorPtr AdditionExpression::CreateDivisionVisitor() const {
+    return VisitorPtr(new AdditionExpressionDivisionVisitor(this));
 }
 
-Visitor* AdditionExpression::CreateAdditionVisitor() const {
-    return new AdditionExpressionAdditionVisitor(this);
+VisitorPtr AdditionExpression::CreateAdditionVisitor() const {
+    return VisitorPtr(new AdditionExpressionAdditionVisitor(this));
 }
 
-Visitor* AdditionExpression::CreateSubtractionVisitor() const {
-    return new AdditionExpressionSubtractionVisitor(this);
+VisitorPtr AdditionExpression::CreateSubtractionVisitor() const {
+    return VisitorPtr(new AdditionExpressionSubtractionVisitor(this));
 }
 
-EqualityVisitor* AdditionExpression::CreateEqualityVisitor() const {
-    return new AdditionExpressionEqualityVisitor(this);
+EqualityVisitorPtr AdditionExpression::CreateEqualityVisitor() const {
+    return EqualityVisitorPtr(new AdditionExpressionEqualityVisitor(this));
 }
 
 // Visitor acception methods
 
-MathElementPtr AdditionExpression::Accept(const Visitor* visitor) const {
+MathElementPtr AdditionExpression::Accept(const VisitorPtr visitor) const {
     return visitor->VisitAdditionExpression(this);
 }
 
-bool AdditionExpression::Accept(const EqualityVisitor* visitor) const {
+bool AdditionExpression::Accept(const EqualityVisitorPtr visitor) const {
     return visitor->VisitAdditionExpression(this);
 }
 

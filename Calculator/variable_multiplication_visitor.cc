@@ -41,11 +41,17 @@ MathElementPtr VariableMultiplicationVisitor::VisitFraction(const Fraction* frac
 MathElementPtr VariableMultiplicationVisitor::VisitVariable(const Variable* variable) const {
     if (Equal(operand_, variable)) {
         // TODO: return an exponent
-        return MathElementPtr(nullptr);
+        return MathElementPtr(new Exponent(operand_->Clone(), MathUtilities::Two()));
     } else {
         // Create and return new MultiplicationExpression with the two variables
         return MathElementPtr(new MultiplicationExpression(operand_->Clone(), variable->Clone()));
     }
+}
+
+// Visit an Exponent
+MathElementPtr VariableMultiplicationVisitor::VisitExponent(const Exponent* exponent) const {
+    // Allow Exponent to take care of it
+    return Multiply(exponent, operand_);
 }
 
 // Visit a MultiplicationExpression

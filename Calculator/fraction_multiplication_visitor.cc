@@ -18,11 +18,8 @@ FractionMultiplicationVisitor::FractionMultiplicationVisitor(const Fraction* ope
 
 // Visit an Integer
 MathElementPtr FractionMultiplicationVisitor::VisitInteger(const Integer* integer) const {
-    // Obtaining the multiplication visitor for the numerator
-    Visitor* numerator_visitor = operand_->numerator()->CreateMultiplicationVisitor();
-    
     // Multiplying the numerator by the integer being visited
-    MathElementPtr result_numerator = numerator_visitor->VisitInteger(integer);
+    MathElementPtr result_numerator = Multiply(operand_->numerator(), integer);
     
     // Constructing and returning a Fraction
     return MathElementPtr(new Fraction(std::move(result_numerator), operand_->ClonedDenominator()));
@@ -37,14 +34,18 @@ MathElementPtr FractionMultiplicationVisitor::VisitDecimal(const Decimal* decima
 
 // Visit a Fraction
 MathElementPtr FractionMultiplicationVisitor::VisitFraction(const Fraction* fraction) const {
-    // Multiplying the numerators
-    MathElementPtr result_num = Multiply(operand_->numerator(), fraction->numerator());
-    
-    // Multiplying the denominators
-    MathElementPtr result_den = Multiply(operand_->denominator(), fraction->denominator());
-    
-    // Constructing and returning a resulting Fraction
-    return MathElementPtr(new Fraction(std::move(result_num), std::move(result_den)));
+    if (Equal(operand_, fraction)) {
+        return MathElementPtr(new Exponent(operand_->Clone(), MathUtilities::Two()));
+    } else {
+        // Multiplying the numerators
+        MathElementPtr result_num = Multiply(operand_->numerator(), fraction->numerator());
+        
+        // Multiplying the denominators
+        MathElementPtr result_den = Multiply(operand_->denominator(), fraction->denominator());
+        
+        // Constructing and returning a resulting Fraction
+        return MathElementPtr(new Fraction(std::move(result_num), std::move(result_den)));
+    }
 }
 
 // Visit a Variable
@@ -54,6 +55,12 @@ MathElementPtr FractionMultiplicationVisitor::VisitVariable(const Variable* vari
     
     // Returning the new fraction
     return MathElementPtr(new Fraction(std::move(result_numerator), operand_->ClonedDenominator()));
+}
+
+// Visit an Exponent
+MathElementPtr FractionMultiplicationVisitor::VisitExponent(const Exponent* exponent) const {
+    // Allow Exponent to take care of it
+    return Multiply(exponent, operand_);
 }
 
 // Visit a MultiplicationExpression

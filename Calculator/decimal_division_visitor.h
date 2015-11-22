@@ -31,6 +31,7 @@ public:
     MathElementPtr VisitDecimal(const Decimal*) const;
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
+    MathElementPtr VisitExponent(const Exponent*) const;
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
     MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };

@@ -42,6 +42,11 @@ MathElementPtr VariableAdditionVisitor::VisitVariable(const Variable* variable) 
     }
 }
 
+// Visit an Exponent
+MathElementPtr VariableAdditionVisitor::VisitExponent(const Exponent* exponent) const {
+    return MathElementPtr(new AdditionExpression(operand_->Clone(), exponent->Clone()));
+}
+
 // Visit a MultiplicationExpression
 MathElementPtr VariableAdditionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {

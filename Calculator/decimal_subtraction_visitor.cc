@@ -44,6 +44,11 @@ MathElementPtr DecimalSubtractionVisitor::VisitVariable(const Variable* variable
     return DecimalValue(operand_, variable);
 }
 
+// Visit an Exponent
+MathElementPtr DecimalSubtractionVisitor::VisitExponent(const Exponent* exponent) const {
+    return DecimalValue(operand_, exponent);
+}
+
 // Visit a MultiplicationExpression
 MathElementPtr DecimalSubtractionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {

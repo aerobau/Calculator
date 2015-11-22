@@ -35,8 +35,8 @@ int main(int argc, const char * argv[]) {
     MathElementPtr third = MathElementPtr(new Integer(5));
     
     MathElementPtr div = Divide(first->Clone(), second->Clone());
-    MathElementPtr div2 = Divide(second->Clone(), second->Clone());
-    MathElementPtr div3 = Divide(second->Clone(), first->Clone());
+    MathElementPtr div2 = Multiply(second->Clone(), second->Clone());
+    MathElementPtr div3 = Add(second->Clone(), first->Clone());
     
     std::cout << div->ToString() << std::endl;
     std::cout << div2->ToString() << std::endl;

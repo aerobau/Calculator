@@ -26,9 +26,13 @@ IntegerSubtractionVisitor::IntegerSubtractionVisitor(const Integer* operand) : o
 
 // Visit an Integer
 MathElementPtr IntegerSubtractionVisitor::VisitInteger(const Integer* integer) const {
-    // Finding the difference of the two integers and constructing and returning an Integer
-    int result_value = operand_->value() - integer->value();
-    return MathElementPtr(new Integer(result_value));
+    if (Equal(operand_, integer)) {
+        return MathUtilities::Zero();
+    } else {
+        // Finding the difference of the two integers and constructing and returning an Integer
+        int result_value = operand_->value() - integer->value();
+        return MathElementPtr(new Integer(result_value));
+    }
 }
 
 // Visit a Decimal
@@ -49,6 +53,11 @@ MathElementPtr IntegerSubtractionVisitor::VisitFraction(const Fraction* fraction
 // Visit a Variable
 MathElementPtr IntegerSubtractionVisitor::VisitVariable(const Variable* variable) const {
     return AddNegation(variable);
+}
+
+// Visit an Exponent
+MathElementPtr IntegerSubtractionVisitor::VisitExponent(const Exponent* exponent) const {
+    return AddNegation(exponent);
 }
 
 // Visit a MultiplicationExpression

@@ -40,6 +40,11 @@ MathElementPtr AdditionExpressionAdditionVisitor::VisitVariable(const Variable* 
     return AddElementToOperand(variable);
 }
 
+// Visit an Exponent
+MathElementPtr AdditionExpressionAdditionVisitor::VisitExponent(const Exponent* exponent) const {
+    return AddElementToOperand(exponent);
+}
+
 // Visit a MultiplicationExpression
 MathElementPtr AdditionExpressionAdditionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {

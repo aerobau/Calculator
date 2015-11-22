@@ -61,6 +61,11 @@ MathElementPtr FractionAdditionVisitor::VisitVariable(const Variable* variable) 
     return MultiplyByDenominatorAndAdd(variable);
 }
 
+// Visit an Exponent
+MathElementPtr FractionAdditionVisitor::VisitExponent(const Exponent* exponent) const {
+    return MultiplyByDenominatorAndAdd(exponent);
+}
+
 // Visit a MultiplicationExpression
 MathElementPtr FractionAdditionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {

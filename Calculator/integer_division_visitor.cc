@@ -58,6 +58,17 @@ MathElementPtr IntegerDivisionVisitor::VisitVariable(const Variable* variable) c
     return MathElementPtr(new Fraction(operand_->Clone(), variable->Clone()));
 }
 
+// Visit an Exponent
+MathElementPtr IntegerDivisionVisitor::VisitExponent(const Exponent* exponent) const {
+    if (Equal(operand_, exponent->base())) {
+        MathElementPtr one_minus_exponent = Subtract(MathUtilities::One().get(),
+                                                     exponent->exponent());
+        return MathElementPtr(new Exponent(operand_->Clone(), one_minus_exponent->Clone()));
+    } else {
+        return MathElementPtr(new Fraction(operand_->Clone(), exponent->Clone()));
+    }
+}
+
 // Visit a MultiplicationExpression
 MathElementPtr IntegerDivisionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {

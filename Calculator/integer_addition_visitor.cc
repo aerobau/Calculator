@@ -30,17 +30,18 @@ MathElementPtr IntegerAdditionVisitor::VisitDecimal(const Decimal* decimal) cons
 
 // Visit a Fraction
 MathElementPtr IntegerAdditionVisitor::VisitFraction(const Fraction* fraction) const {
-    // Making a fraction out of the operand by putting it over 1
-    MathElementPtr integer_as_fraction =
-        MathElementPtr(new Fraction(operand_->Clone(), MathUtilities::One()));
-    
-    // Adding the two fractions
-    return integer_as_fraction->CreateAdditionVisitor()->VisitFraction(fraction);
+    // Allow fraction to take care of it
+    return Add(fraction, operand_);
 }
 
 // Visit a Variable
 MathElementPtr IntegerAdditionVisitor::VisitVariable(const Variable* variable) const {
-    return MathElementPtr(nullptr);
+    return MathElementPtr(new AdditionExpression(operand_->Clone(), variable->Clone()));
+}
+
+// Visit an Exponent
+MathElementPtr IntegerAdditionVisitor::VisitExponent(const Exponent* exponent) const {
+    return MathElementPtr(new AdditionExpression(operand_->Clone(), exponent->Clone()));
 }
 
 // Visit a MultiplicationExpression

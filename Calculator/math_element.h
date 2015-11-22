@@ -15,14 +15,14 @@
 
 class MathElement {
   public:
-    virtual Visitor* CreateMultiplicationVisitor() const = 0;
-    virtual Visitor* CreateDivisionVisitor() const = 0;
-    virtual Visitor* CreateAdditionVisitor() const = 0;
-    virtual Visitor* CreateSubtractionVisitor() const = 0;
-    virtual EqualityVisitor* CreateEqualityVisitor() const = 0;
+    virtual VisitorPtr CreateMultiplicationVisitor() const = 0;
+    virtual VisitorPtr CreateDivisionVisitor() const = 0;
+    virtual VisitorPtr CreateAdditionVisitor() const = 0;
+    virtual VisitorPtr CreateSubtractionVisitor() const = 0;
+    virtual EqualityVisitorPtr CreateEqualityVisitor() const = 0;
     
-    virtual MathElementPtr Accept(const Visitor*) const = 0;
-    virtual bool Accept(const EqualityVisitor*) const = 0;
+    virtual MathElementPtr Accept(const VisitorPtr) const = 0;
+    virtual bool Accept(const EqualityVisitorPtr) const = 0;
     
     virtual double DoubleValue() const = 0;
     virtual std::string ToString() const = 0;

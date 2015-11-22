@@ -37,6 +37,17 @@ MathElementPtr AdditionExpressionDivisionVisitor::VisitVariable(const Variable* 
     return DistributeDivide(variable);
 }
 
+// Visit an Exponent
+MathElementPtr AdditionExpressionDivisionVisitor::VisitExponent(const Exponent* exponent) const {
+    if (Equal(operand_, exponent->base())) {
+        MathElementPtr one_minus_exponent = Subtract(MathUtilities::One().get(),
+                                                     exponent->exponent());
+        return MathElementPtr(new Exponent(operand_->Clone(), one_minus_exponent->Clone()));
+    } else {
+        return MathElementPtr(new Fraction(operand_->Clone(), exponent->Clone()));
+    }
+}
+
 MathElementPtr AdditionExpressionDivisionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
     // Divide by each element individually and return the result
@@ -63,8 +74,7 @@ DistributeDivide(const MathElement* distributing_element) const {
     // addition expression operand by the integer being visited
     std::vector<MathElementPtr> result_elements;
     for (int i = 0; i < elements->size(); ++i) {
-        Visitor* visitor = elements->at(i)->CreateDivisionVisitor();
-        result_elements.push_back(distributing_element->Accept(visitor));
+        result_elements.push_back(Divide(elements->at(i).get(), distributing_element));
     }
     
     // Constructing and returning a new AdditionExpression

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D609F8211C0172C400A0D50D /* exponent.cc in Sources */ = {isa = PBXBuildFile; fileRef = D609F81F1C0172C400A0D50D /* exponent.cc */; settings = {ASSET_TAGS = (); }; };
+		D609F8241C01786A00A0D50D /* exponent_multiplication_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D609F8221C01786A00A0D50D /* exponent_multiplication_visitor.cc */; settings = {ASSET_TAGS = (); }; };
+		D609F8271C017CDD00A0D50D /* exponent_division_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D609F8251C017CDD00A0D50D /* exponent_division_visitor.cc */; settings = {ASSET_TAGS = (); }; };
+		D609F82A1C01803C00A0D50D /* exponent_addition_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D609F8281C01803C00A0D50D /* exponent_addition_visitor.cc */; settings = {ASSET_TAGS = (); }; };
+		D609F82D1C01825500A0D50D /* exponent_subtraction_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D609F82B1C01825500A0D50D /* exponent_subtraction_visitor.cc */; settings = {ASSET_TAGS = (); }; };
 		D68F1C491BF2DD17006FCFD0 /* visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D68F1C481BF2DD17006FCFD0 /* visitor.cc */; settings = {ASSET_TAGS = (); }; };
 		D69866C11BE66B0B00C0B3A2 /* equality_visitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866BF1BE66B0B00C0B3A2 /* equality_visitor.cc */; settings = {ASSET_TAGS = (); }; };
 		D69866C41BE6742B00C0B3A2 /* variable.cc in Sources */ = {isa = PBXBuildFile; fileRef = D69866C21BE6742B00C0B3A2 /* variable.cc */; settings = {ASSET_TAGS = (); }; };
@@ -55,6 +60,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D609F81F1C0172C400A0D50D /* exponent.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exponent.cc; sourceTree = "<group>"; };
+		D609F8201C0172C400A0D50D /* exponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exponent.h; sourceTree = "<group>"; };
+		D609F8221C01786A00A0D50D /* exponent_multiplication_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exponent_multiplication_visitor.cc; sourceTree = "<group>"; };
+		D609F8231C01786A00A0D50D /* exponent_multiplication_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exponent_multiplication_visitor.h; sourceTree = "<group>"; };
+		D609F8251C017CDD00A0D50D /* exponent_division_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exponent_division_visitor.cc; sourceTree = "<group>"; };
+		D609F8261C017CDD00A0D50D /* exponent_division_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exponent_division_visitor.h; sourceTree = "<group>"; };
+		D609F8281C01803C00A0D50D /* exponent_addition_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exponent_addition_visitor.cc; sourceTree = "<group>"; };
+		D609F8291C01803C00A0D50D /* exponent_addition_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exponent_addition_visitor.h; sourceTree = "<group>"; };
+		D609F82B1C01825500A0D50D /* exponent_subtraction_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exponent_subtraction_visitor.cc; sourceTree = "<group>"; };
+		D609F82C1C01825500A0D50D /* exponent_subtraction_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exponent_subtraction_visitor.h; sourceTree = "<group>"; };
 		D68F1C481BF2DD17006FCFD0 /* visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = visitor.cc; sourceTree = "<group>"; };
 		D69866BF1BE66B0B00C0B3A2 /* equality_visitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = equality_visitor.cc; sourceTree = "<group>"; };
 		D69866C01BE66B0B00C0B3A2 /* equality_visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = equality_visitor.h; sourceTree = "<group>"; };
@@ -148,6 +163,8 @@
 				D6ECFCD41BE42D0600D0618B /* fraction.cc */,
 				D69866C31BE6742B00C0B3A2 /* variable.h */,
 				D69866C21BE6742B00C0B3A2 /* variable.cc */,
+				D609F8201C0172C400A0D50D /* exponent.h */,
+				D609F81F1C0172C400A0D50D /* exponent.cc */,
 				D69866D31BE6B08000C0B3A2 /* multiplication_expression.h */,
 				D69866D21BE6B08000C0B3A2 /* multiplication_expression.cc */,
 				D69866E21BEA742800C0B3A2 /* addition_expression.h */,
@@ -194,6 +211,8 @@
 				D6ECFCF71BE4624C00D0618B /* fraction_subtraction_visitor.cc */,
 				D69866CF1BE67ACB00C0B3A2 /* variable_subtraction_visitor.h */,
 				D69866CE1BE67ACB00C0B3A2 /* variable_subtraction_visitor.cc */,
+				D609F82C1C01825500A0D50D /* exponent_subtraction_visitor.h */,
+				D609F82B1C01825500A0D50D /* exponent_subtraction_visitor.cc */,
 				D69866DF1BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.h */,
 				D69866DE1BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.cc */,
 				D69866EE1BEA8D0A00C0B3A2 /* addition_expression_subtraction_visitor.h */,
@@ -213,6 +232,8 @@
 				D6ECFCF41BE4612E00D0618B /* fraction_addition_visitor.cc */,
 				D69866CC1BE67A2F00C0B3A2 /* variable_addition_visitor.h */,
 				D69866CB1BE67A2F00C0B3A2 /* variable_addition_visitor.cc */,
+				D609F8291C01803C00A0D50D /* exponent_addition_visitor.h */,
+				D609F8281C01803C00A0D50D /* exponent_addition_visitor.cc */,
 				D69866DC1BE6B7F800C0B3A2 /* multiplication_expression_addition_visitor.h */,
 				D69866DB1BE6B7F800C0B3A2 /* multiplication_expression_addition_visitor.cc */,
 				D69866EB1BEA8CA100C0B3A2 /* addition_expression_addition_visitor.h */,
@@ -232,6 +253,8 @@
 				D6ECFCF11BE45F3600D0618B /* fraction_division_visitor.cc */,
 				D69866C91BE6791C00C0B3A2 /* variable_division_visitor.h */,
 				D69866C81BE6791C00C0B3A2 /* variable_division_visitor.cc */,
+				D609F8261C017CDD00A0D50D /* exponent_division_visitor.h */,
+				D609F8251C017CDD00A0D50D /* exponent_division_visitor.cc */,
 				D69866D91BE6B76000C0B3A2 /* multiplication_expression_division_visitor.h */,
 				D69866D81BE6B76000C0B3A2 /* multiplication_expression_division_visitor.cc */,
 				D69866E81BEA8BDB00C0B3A2 /* addition_expression_division_visitor.h */,
@@ -251,6 +274,8 @@
 				D6ECFCEE1BE45BC600D0618B /* fraction_multiplication_visitor.cc */,
 				D69866C61BE6775700C0B3A2 /* variable_multiplication_visitor.h */,
 				D69866C51BE6775700C0B3A2 /* variable_multiplication_visitor.cc */,
+				D609F8231C01786A00A0D50D /* exponent_multiplication_visitor.h */,
+				D609F8221C01786A00A0D50D /* exponent_multiplication_visitor.cc */,
 				D69866D61BE6B67A00C0B3A2 /* multiplication_expression_multiplication_visitor.h */,
 				D69866D51BE6B67A00C0B3A2 /* multiplication_expression_multiplication_visitor.cc */,
 				D69866E51BEA7A7300C0B3A2 /* addition_expression_multiplication_visitor.h */,
@@ -331,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D69866E01BE6B85400C0B3A2 /* multiplication_expression_subtraction_visitor.cc in Sources */,
+				D609F8241C01786A00A0D50D /* exponent_multiplication_visitor.cc in Sources */,
 				D69866D01BE67ACB00C0B3A2 /* variable_subtraction_visitor.cc in Sources */,
 				D68F1C491BF2DD17006FCFD0 /* visitor.cc in Sources */,
 				D6ECFCA81BDFF45800D0618B /* main.cc in Sources */,
@@ -338,14 +364,17 @@
 				D6ECFCEA1BE44B6B00D0618B /* decimal_addition_visitor.cc in Sources */,
 				D69866DA1BE6B76000C0B3A2 /* multiplication_expression_division_visitor.cc in Sources */,
 				D6ECFCD61BE42D0600D0618B /* fraction.cc in Sources */,
+				D609F8211C0172C400A0D50D /* exponent.cc in Sources */,
 				D69866E61BEA7A7300C0B3A2 /* addition_expression_multiplication_visitor.cc in Sources */,
 				D69866EC1BEA8CA100C0B3A2 /* addition_expression_addition_visitor.cc in Sources */,
 				D69866CA1BE6791C00C0B3A2 /* variable_division_visitor.cc in Sources */,
 				D69866C11BE66B0B00C0B3A2 /* equality_visitor.cc in Sources */,
 				D6ECFCE41BE448C500D0618B /* decimal_multiplication_visitor.cc in Sources */,
 				D69866C71BE6775700C0B3A2 /* variable_multiplication_visitor.cc in Sources */,
+				D609F82D1C01825500A0D50D /* exponent_subtraction_visitor.cc in Sources */,
 				D6ECFCDC1BE4335E00D0618B /* integer_subtraction_visitor.cc in Sources */,
 				D6ECFCF01BE45BC600D0618B /* fraction_multiplication_visitor.cc in Sources */,
+				D609F8271C017CDD00A0D50D /* exponent_division_visitor.cc in Sources */,
 				D6ECFCF91BE4624C00D0618B /* fraction_subtraction_visitor.cc in Sources */,
 				D6ECFCCA1BE420AC00D0618B /* integer_multiplication_visitor.cc in Sources */,
 				D69866D41BE6B08000C0B3A2 /* multiplication_expression.cc in Sources */,
@@ -353,6 +382,7 @@
 				D69866EF1BEA8D0A00C0B3A2 /* addition_expression_subtraction_visitor.cc in Sources */,
 				D69866D71BE6B67A00C0B3A2 /* multiplication_expression_multiplication_visitor.cc in Sources */,
 				D6ECFCD01BE425B400D0618B /* integer_division_visitor.cc in Sources */,
+				D609F82A1C01803C00A0D50D /* exponent_addition_visitor.cc in Sources */,
 				D6ECFCD91BE4322900D0618B /* integer_addition_visitor.cc in Sources */,
 				D69866E31BEA742800C0B3A2 /* addition_expression.cc in Sources */,
 				D6ECFCCD1BE422D800D0618B /* integer.cc in Sources */,

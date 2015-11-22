@@ -38,6 +38,11 @@ MathElementPtr DecimalDivisionVisitor::VisitVariable(const Variable* variable) c
     return DecimalValue(operand_, variable);
 }
 
+// Visit an Exponent
+MathElementPtr DecimalDivisionVisitor::VisitExponent(const Exponent* exponent) const {
+    return DecimalValue(operand_, exponent);
+}
+
 MathElementPtr DecimalDivisionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
     // Dividing the double values, constructing and returning a Decimal

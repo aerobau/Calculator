@@ -11,8 +11,13 @@
 #include "decimal.h"
 #include "fraction.h"
 #include "variable.h"
+#include "exponent.h"
 #include "multiplication_expression.h"
 #include "addition_expression.h"
+
+bool EqualityVisitor::Equal(const MathElement* first, const MathElement* second) const {
+    return second->Accept(first->CreateEqualityVisitor());
+}
 
 IntegerEqualityVisitor::IntegerEqualityVisitor(const Integer* operand) : operand_(operand) {}
 
@@ -29,16 +34,21 @@ bool DecimalEqualityVisitor::VisitDecimal(const Decimal* decimal) const {
 FractionEqualityVisitor::FractionEqualityVisitor(const Fraction* operand) : operand_(operand) {}
 
 bool FractionEqualityVisitor::VisitFraction(const Fraction* fraction) const {
-    EqualityVisitor* numerator_visit = operand_->numerator()->CreateEqualityVisitor();
-    EqualityVisitor* denominator_visit = operand_->denominator()->CreateEqualityVisitor();
-    return fraction->numerator()->Accept(numerator_visit) &&
-           fraction->denominator()->Accept(denominator_visit);
+    return Equal(operand_->numerator(), fraction->numerator()) &&
+           Equal(operand_->denominator(), fraction->denominator());
 }
 
 VariableEqualityVisitor::VariableEqualityVisitor(const Variable* operand) : operand_(operand) {}
 
 bool VariableEqualityVisitor::VisitVariable(const Variable* variable) const {
     return operand_->representation() == variable->representation();
+}
+
+ExponentEqualityVisitor::ExponentEqualityVisitor(const Exponent* operand) : operand_(operand) {}
+
+bool ExponentEqualityVisitor::VisitExponent(const Exponent* exponent) const {
+    return Equal(operand_->base(), exponent->base()) &&
+           Equal(operand_->exponent(), exponent->exponent());
 }
 
 MultiplicationExpressionEqualityVisitor::
@@ -52,7 +62,7 @@ VisitMultiplicationExpression(const MultiplicationExpression* expression) const 
         std::vector<MathElementPtr> cloned_expression_elements = expression->ClonedElements();
         for (int i = 0; i < cloned_operand_elements.size(); ++i) {
             for (int j = 0; j < cloned_expression_elements.size(); ++j) {
-                if (cloned_operand_elements[i] == cloned_expression_elements[j]) {
+                if (Equal(cloned_operand_elements[i].get(), cloned_expression_elements[j].get())) {
                     cloned_expression_elements.erase(cloned_expression_elements.begin() + j);
                 }
             }
@@ -77,7 +87,7 @@ VisitAdditionExpression(const AdditionExpression* expression) const {
         std::vector<MathElementPtr> cloned_expression_elements = expression->ClonedElements();
         for (int i = 0; i < cloned_operand_elements.size(); ++i) {
             for (int j = 0; j < cloned_expression_elements.size(); ++j) {
-                if (cloned_operand_elements[i] == cloned_expression_elements[j]) {
+                if (Equal(cloned_operand_elements[i].get(), cloned_expression_elements[j].get())) {
                     cloned_expression_elements.erase(cloned_expression_elements.begin() + j);
                 }
             }

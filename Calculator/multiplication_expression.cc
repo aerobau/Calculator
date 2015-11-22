@@ -12,34 +12,37 @@ MultiplicationExpression::MultiplicationExpression(std::vector<MathElementPtr> e
 : elements_(std::move(elements)) {}
 
 MultiplicationExpression::MultiplicationExpression(MathElementPtr first, MathElementPtr second)
-: elements_({std::move(first), std::move(second)}) {}
-
-Visitor* MultiplicationExpression::CreateMultiplicationVisitor() const {
-    return new MultiplicationExpressionMultiplicationVisitor(this);
+: elements_(std::vector<MathElementPtr>()) {
+    elements_.push_back(std::move(first));
+    elements_.push_back(std::move(second));
 }
 
-Visitor* MultiplicationExpression::CreateDivisionVisitor() const {
-    return new MultiplicationExpressionDivisionVisitor(this);
+VisitorPtr MultiplicationExpression::CreateMultiplicationVisitor() const {
+    return VisitorPtr(new MultiplicationExpressionMultiplicationVisitor(this));
 }
 
-Visitor* MultiplicationExpression::CreateAdditionVisitor() const {
-    return new MultiplicationExpressionAdditionVisitor(this);
+VisitorPtr MultiplicationExpression::CreateDivisionVisitor() const {
+    return VisitorPtr(new MultiplicationExpressionDivisionVisitor(this));
 }
 
-Visitor* MultiplicationExpression::CreateSubtractionVisitor() const {
-    return new MultiplicationExpressionSubtractionVisitor(this);
+VisitorPtr MultiplicationExpression::CreateAdditionVisitor() const {
+    return VisitorPtr(new MultiplicationExpressionAdditionVisitor(this));
 }
 
-EqualityVisitor* MultiplicationExpression::CreateEqualityVisitor() const {
-    return new MultiplicationExpressionEqualityVisitor(this);
+VisitorPtr MultiplicationExpression::CreateSubtractionVisitor() const {
+    return VisitorPtr(new MultiplicationExpressionSubtractionVisitor(this));
+}
+
+EqualityVisitorPtr MultiplicationExpression::CreateEqualityVisitor() const {
+    return EqualityVisitorPtr(new MultiplicationExpressionEqualityVisitor(this));
 }
 
 
-MathElementPtr MultiplicationExpression::Accept(const Visitor* visitor) const {
+MathElementPtr MultiplicationExpression::Accept(const VisitorPtr visitor) const {
     return visitor->VisitMultiplicationExpression(this);
 }
 
-bool MultiplicationExpression::Accept(const EqualityVisitor* visitor) const {
+bool MultiplicationExpression::Accept(const EqualityVisitorPtr visitor) const {
     return visitor->VisitMultiplicationExpression(this);
 }
 

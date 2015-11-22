@@ -15,33 +15,33 @@ Integer::Integer(int value) : value_(value) {}
 
 // VISITOR CREATION METHODS // Create different visitors based on function
 
-Visitor* Integer::CreateMultiplicationVisitor() const {
-    return new IntegerMultiplicationVisitor(this);
+VisitorPtr Integer::CreateMultiplicationVisitor() const {
+    return VisitorPtr(new IntegerMultiplicationVisitor(this));
 }
 
-Visitor* Integer::CreateDivisionVisitor() const {
-    return new IntegerDivisionVisitor(this);
+VisitorPtr Integer::CreateDivisionVisitor() const {
+    return VisitorPtr(new IntegerDivisionVisitor(this));
 }
 
-Visitor* Integer::CreateAdditionVisitor() const {
-    return new IntegerAdditionVisitor(this);
+VisitorPtr Integer::CreateAdditionVisitor() const {
+    return VisitorPtr(new IntegerAdditionVisitor(this));
 }
 
-Visitor* Integer::CreateSubtractionVisitor() const {
-    return new IntegerSubtractionVisitor(this);
+VisitorPtr Integer::CreateSubtractionVisitor() const {
+    return VisitorPtr(new IntegerSubtractionVisitor(this));
 }
 
-EqualityVisitor* Integer::CreateEqualityVisitor() const {
-    return new IntegerEqualityVisitor(this);
+EqualityVisitorPtr Integer::CreateEqualityVisitor() const {
+    return EqualityVisitorPtr(new IntegerEqualityVisitor(this));
 }
 
 // VISITOR ACCEPTION METHODS // Accept and double dispatch to visitors
 
-MathElementPtr Integer::Accept(const Visitor* visitor) const {
+MathElementPtr Integer::Accept(const VisitorPtr visitor) const {
     return visitor->VisitInteger(this);
 }
 
-bool Integer::Accept(const EqualityVisitor* visitor) const {
+bool Integer::Accept(const EqualityVisitorPtr visitor) const {
     return visitor->VisitInteger(this);
 }
 

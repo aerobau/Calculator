@@ -33,7 +33,7 @@ MathElementPtr IntegerMultiplicationVisitor::VisitDecimal(const Decimal* decimal
 // Visit a fraction
 MathElementPtr IntegerMultiplicationVisitor::VisitFraction(const Fraction* fraction) const {
     // Utilizing the multiplication visitor to multiply the numerator by the operand
-    MathElementPtr result_numerator = fraction->numerator()->Accept(this);
+    MathElementPtr result_numerator = Multiply(operand_, fraction->numerator());
     
     // Constructing and returning a Fraction
     return MathElementPtr(new Fraction(std::move(result_numerator), fraction->ClonedDenominator()));
@@ -48,6 +48,12 @@ MathElementPtr IntegerMultiplicationVisitor::VisitVariable(const Variable* varia
     
     // Constrcuting and returning a new MultiplcationExpression
     return MathElementPtr(new MultiplicationExpression(std::move(elements)));
+}
+
+// Visit an Exponent
+MathElementPtr IntegerMultiplicationVisitor::VisitExponent(const Exponent* exponent) const {
+    // Allow Exponent to take care of it
+    return Multiply(exponent, operand_);
 }
 
 // Visit a MultiplicationExpression

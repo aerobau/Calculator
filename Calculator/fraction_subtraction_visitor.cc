@@ -10,8 +10,8 @@
 
 // -- PRIVATE FUNCTIONS -- //
 
-MathElementPtr FractionAdditionVisitor::
-MultiplyByDenominatorAndAdd(const MathElement* element) const {
+MathElementPtr FractionSubtractionVisitor::
+MultiplyByDenominatorAndSubtract(const MathElement* element) const {
     // Multiplying by the denominator and adding to the operand numerator
     MathElementPtr element_times_denominator = Multiply(element, operand_->denominator());
     MathElementPtr result_numerator = Subtract(operand_->numerator(),
@@ -53,6 +53,10 @@ MathElementPtr FractionSubtractionVisitor::VisitFraction(const Fraction* fractio
 
 MathElementPtr FractionSubtractionVisitor::VisitVariable(const Variable* variable) const {
     return MultiplyByDenominatorAndSubtract(variable);
+}
+
+MathElementPtr FractionSubtractionVisitor::VisitExponent(const Exponent* exponent) const {
+    return MultiplyByDenominatorAndSubtract(exponent);
 }
 
 MathElementPtr FractionSubtractionVisitor::

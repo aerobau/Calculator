@@ -1,29 +1,23 @@
 //
-//  variable.hpp
+//  exponent.hpp
 //  Calculator
 //
-//  Created by Alexander Robau on 11/1/15.
+//  Created by Alexander Robau on 11/21/15.
 //  Copyright © 2015 Robau inc. All rights reserved.
 //
 
-#ifndef VARIABLE_H_
-#define VARIABLE_H_
+#ifndef EXPONENT_H_
+#define EXPONENT_H_
 
 #include "math_element.h"
-#include "variable_multiplication_visitor.h"
-#include "variable_division_visitor.h"
-#include "variable_addition_visitor.h"
-#include "variable_subtraction_visitor.h"
 
-class Variable : public MathElement {
-  private:
-    char representation_;
+class Exponent : public MathElement {
+private:
+    MathElementPtr base_;
+    MathElementPtr exponent_;
+public:
+    Exponent(MathElementPtr, MathElementPtr);
     
-  public:
-    // Constructor
-    explicit Variable(char);
-    
-    // MathElement overrides
     VisitorPtr CreateMultiplicationVisitor() const;
     VisitorPtr CreateDivisionVisitor() const;
     VisitorPtr CreateAdditionVisitor() const;
@@ -38,10 +32,14 @@ class Variable : public MathElement {
     
     MathElementPtr Clone() const;
     
-    // Class specific methods
+    // Class specific functions
     
-    // Accessor
-    char representation() const;
+    const MathElement* base() const;
+    const MathElement* exponent() const;
+    
+    MathElementPtr ClonedBase() const;
+    MathElementPtr ClonedExponent() const;
 };
 
-#endif // VARIABLE_H_
+#endif // EXPONENT_H_
+

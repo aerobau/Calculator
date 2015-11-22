@@ -40,6 +40,12 @@ MathElementPtr DecimalMultiplicationVisitor::VisitVariable(const Variable* varia
     return DecimalResult(operand_, variable);
 }
 
+// Visit an Exponent
+MathElementPtr DecimalMultiplicationVisitor::VisitExponent(const Exponent* exponent) const {
+    // Return the resulting Decimal
+    return DecimalResult(operand_, exponent);
+}
+
 // Visit a MultiplicationExpression
 MathElementPtr DecimalMultiplicationVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
@@ -47,6 +53,7 @@ VisitMultiplicationExpression(const MultiplicationExpression* expression) const 
     return DecimalResult(operand_, expression);
 }
 
+// Visit an AdditionExpression
 MathElementPtr DecimalMultiplicationVisitor::
 VisitAdditionExpression(const AdditionExpression* expression) const {
     // return the resulting Decimal

@@ -24,14 +24,14 @@ class Integer: public MathElement {
     explicit Integer(int);
     
     // MathElement overrides
-    Visitor* CreateMultiplicationVisitor() const;
-    Visitor* CreateDivisionVisitor() const;
-    Visitor* CreateAdditionVisitor() const;
-    Visitor* CreateSubtractionVisitor() const;
-    EqualityVisitor* CreateEqualityVisitor() const;
+    VisitorPtr CreateMultiplicationVisitor() const;
+    VisitorPtr CreateDivisionVisitor() const;
+    VisitorPtr CreateAdditionVisitor() const;
+    VisitorPtr CreateSubtractionVisitor() const;
+    EqualityVisitorPtr CreateEqualityVisitor() const;
     
-    MathElementPtr Accept(const Visitor*) const;
-    bool Accept(const EqualityVisitor*) const;
+    MathElementPtr Accept(const VisitorPtr) const;
+    bool Accept(const EqualityVisitorPtr) const;
     
     double DoubleValue() const;
     std::string ToString() const;

@@ -50,10 +50,20 @@ VisitVariable(const Variable* variable) const {
     return AddNegation(variable);
 }
 
+// Visit an Exponent
+MathElementPtr MultiplicationExpressionSubtractionVisitor::
+VisitExponent(const Exponent* exponent) const {
+    return AddNegation(exponent);
+}
+
 // Visit a MultiplicationExpression
 MathElementPtr MultiplicationExpressionSubtractionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
-    return AddNegation(expression);
+    if (Equal(operand_, expression)) {
+        return MathUtilities::Zero();
+    } else {
+        return AddNegation(expression);
+    }
 }
 
 // Visit an AdditionExpression

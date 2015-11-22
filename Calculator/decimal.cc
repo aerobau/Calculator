@@ -10,31 +10,31 @@
 
 Decimal::Decimal(double value): value_(value) {}
 
-Visitor* Decimal::CreateMultiplicationVisitor() const {
-    return new DecimalMultiplicationVisitor(this);
+VisitorPtr Decimal::CreateMultiplicationVisitor() const {
+    return VisitorPtr(new DecimalMultiplicationVisitor(this));
 }
 
-Visitor* Decimal::CreateDivisionVisitor() const {
-    return new DecimalDivisionVisitor(this);
+VisitorPtr Decimal::CreateDivisionVisitor() const {
+    return VisitorPtr(new DecimalDivisionVisitor(this));
 }
 
-Visitor* Decimal::CreateAdditionVisitor() const {
-    return new DecimalAdditionVisitor(this);
+VisitorPtr Decimal::CreateAdditionVisitor() const {
+    return VisitorPtr(new DecimalAdditionVisitor(this));
 }
 
-Visitor* Decimal::CreateSubtractionVisitor() const {
-    return new DecimalSubtractionVisitor(this);
+VisitorPtr Decimal::CreateSubtractionVisitor() const {
+    return VisitorPtr(new DecimalSubtractionVisitor(this));
 }
 
-EqualityVisitor* Decimal::CreateEqualityVisitor() const {
-    return new DecimalEqualityVisitor(this);
+EqualityVisitorPtr Decimal::CreateEqualityVisitor() const {
+    return EqualityVisitorPtr(new DecimalEqualityVisitor(this));
 }
 
-MathElementPtr Decimal::Accept(const Visitor* visitor) const {
+MathElementPtr Decimal::Accept(const VisitorPtr visitor) const {
     return visitor->VisitDecimal(this);
 }
 
-bool Decimal::Accept(const EqualityVisitor* visitor) const {
+bool Decimal::Accept(const EqualityVisitorPtr visitor) const {
     return visitor->VisitDecimal(this);
 }
 

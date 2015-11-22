@@ -48,11 +48,21 @@ VisitVariable(const Variable* variable) const {
     return AddElementToOperand(variable);
 }
 
+// Visit an Exponent
+MathElementPtr MultiplicationExpressionMultiplicationVisitor::
+VisitExponent(const Exponent* exponent) const {
+    // Allow Exponent to handle
+    return Multiply(exponent, operand_);
+}
+
 // Visit a MultiplicationExpression
 MathElementPtr MultiplicationExpressionMultiplicationVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
-    // Constructing and returning a multiplciation expression with the additional elements
-    return AddElementsToOperand(expression->elements());
+    if (Equal(operand_, expression)) {
+        return MathElementPtr(new Exponent(operand_->Clone(), MathUtilities::Two()));
+    } else {
+        return AddElementsToOperand(expression->elements());
+    }
 }
 
 // Visit an AdditionExpression

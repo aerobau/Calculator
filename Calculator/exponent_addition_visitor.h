@@ -1,28 +1,29 @@
 //
-//  variable_subtraction_visitor.hpp
+//  exponent_addition_visitor.hpp
 //  Calculator
 //
-//  Created by Alexander Robau on 11/1/15.
+//  Created by Alexander Robau on 11/21/15.
 //  Copyright © 2015 Robau inc. All rights reserved.
 //
 
-#ifndef VARIABLE_SUBTRACTION_VISITOR_H_
-#define VARIABLE_SUBTRACTION_VISITOR_H_
+#ifndef EXPONENT_ADDITION_VISITOR_H_
+#define EXPONENT_ADDITION_VISITOR_H_
 
 #include "visitor.h"
 #include "integer.h"
 #include "decimal.h"
 #include "fraction.h"
 #include "variable.h"
+#include "exponent.h"
+#include "multiplication_expression.h"
+#include "addition_expression.h"
 
-class VariableSubtractionVisitor : public Visitor {
+class ExponentAdditionVisitor : public Visitor {
 private:
-    const Variable* operand_;
-    
-    MathElementPtr AddNegation(const MathElement*) const;
+    const Exponent* operand_;
     
 public:
-    VariableSubtractionVisitor(const Variable*);
+    ExponentAdditionVisitor(const Exponent*);
     
     MathElementPtr VisitInteger(const Integer*) const;
     MathElementPtr VisitDecimal(const Decimal*) const;
@@ -32,4 +33,5 @@ public:
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
     MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
-#endif /* variable_subtraction_visitor_hpp */
+
+#endif // EXPONENT_ADDITION_VISITOR_H_

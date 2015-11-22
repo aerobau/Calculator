@@ -11,33 +11,33 @@
 Fraction::Fraction(MathElementPtr numerator, MathElementPtr denominator)
 : numerator_(std::move(numerator)), denominator_(std::move(denominator)) {}
 
-Visitor* Fraction::CreateMultiplicationVisitor() const {
-    return new FractionMultiplicationVisitor(this);
+VisitorPtr Fraction::CreateMultiplicationVisitor() const {
+    return VisitorPtr(new FractionMultiplicationVisitor(this));
 }
 
-Visitor* Fraction::CreateDivisionVisitor() const {
-    return new FractionDivisionVisitor(this);
+VisitorPtr Fraction::CreateDivisionVisitor() const {
+    return VisitorPtr(new FractionDivisionVisitor(this));
 }
 
-Visitor* Fraction::CreateAdditionVisitor() const {
-    return new FractionAdditionVisitor(this);
+VisitorPtr Fraction::CreateAdditionVisitor() const {
+    return VisitorPtr(new FractionAdditionVisitor(this));
 }
 
-Visitor* Fraction::CreateSubtractionVisitor() const {
-    return new FractionSubtractionVisitor(this);
+VisitorPtr Fraction::CreateSubtractionVisitor() const {
+    return VisitorPtr(new FractionSubtractionVisitor(this));
 }
 
-EqualityVisitor* Fraction::CreateEqualityVisitor() const {
-    return new FractionEqualityVisitor(this);
+EqualityVisitorPtr Fraction::CreateEqualityVisitor() const {
+    return EqualityVisitorPtr(new FractionEqualityVisitor(this));
 }
 
 
 
-MathElementPtr Fraction::Accept(const Visitor* visitor) const {
+MathElementPtr Fraction::Accept(const VisitorPtr visitor) const {
     return visitor->VisitFraction(this);
 }
 
-bool Fraction::Accept(const EqualityVisitor* visitor) const {
+bool Fraction::Accept(const EqualityVisitorPtr visitor) const {
     return visitor->VisitFraction(this);
 }
 
