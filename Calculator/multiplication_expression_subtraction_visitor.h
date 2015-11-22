@@ -21,8 +21,17 @@ private:
     // Storage for the first operand
     const MultiplicationExpression* operand_;
     
+    MathElementPtr AddNegation(const MathElement*) const;
+    
 public:
     MultiplicationExpressionSubtractionVisitor(const MultiplicationExpression*);
+    
+    MathElementPtr VisitInteger(const Integer*) const;
+    MathElementPtr VisitDecimal(const Decimal*) const;
+    MathElementPtr VisitFraction(const Fraction*) const;
+    MathElementPtr VisitVariable(const Variable*) const;
+    MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 
 #endif // MULTIPLICATION_EXPRESSION_SUBTRATION_VISITOR_H_

@@ -22,6 +22,8 @@ class AdditionExpressionSubtractionVisitor : public Visitor {
     // Storage for the first operand
     const AdditionExpression* operand_;
     
+    MathElementPtr AddNegation(const MathElement*) const;
+    
   public:
     // Constructor
     AdditionExpressionSubtractionVisitor(const AdditionExpression*);
@@ -33,9 +35,6 @@ class AdditionExpressionSubtractionVisitor : public Visitor {
     MathElementPtr VisitVariable(const Variable*) const;
     MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
     MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
-    
-    // Class specific methods
-    MathElementPtr AddElementToOperand(const MathElement*) const;
 };
 
 #endif // ADDITION_EXPRESSION_SUBTRACTION_VISITOR_H_

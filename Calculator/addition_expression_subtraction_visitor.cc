@@ -8,12 +8,20 @@
 
 #include "addition_expression_subtraction_visitor.h"
 
+// -- PRIVATE FUNCTIONS -- //
+
+MathElementPtr AdditionExpressionSubtractionVisitor::AddNegation(const MathElement* element) const {
+    MathElementPtr negation = Multiply(MathUtilities::NegativeOne().get(), element);
+    return Add(operand_, negation.get());
+}
+
+// ++ PUBLIC FUNCTIONS ++ //
+
 AdditionExpressionSubtractionVisitor::
 AdditionExpressionSubtractionVisitor(const AdditionExpression* operand) : operand_(operand) {}
 
 MathElementPtr AdditionExpressionSubtractionVisitor::VisitInteger(const Integer* integer) const {
-    MathElementPtr negative_integer = MathElementPtr(new Integer(integer->value() * -1));
-    return AddElementToOperand(negative_integer.get());
+    return AddNegation(integer);
 }
 
 MathElementPtr AdditionExpressionSubtractionVisitor::VisitDecimal(const Decimal* decimal) const {
@@ -22,34 +30,19 @@ MathElementPtr AdditionExpressionSubtractionVisitor::VisitDecimal(const Decimal*
 }
 
 MathElementPtr AdditionExpressionSubtractionVisitor::VisitFraction(const Fraction* fraction) const {
-    MathElementPtr neg_one = MathUtilities::NegativeOne();
-    MathElementPtr negative_fraction = fraction->Accept(neg_one->CreateMultiplicationVisitor());
-    return AddElementToOperand(negative_fraction.get());
+    return AddNegation(fraction);
 }
 
 MathElementPtr AdditionExpressionSubtractionVisitor::VisitVariable(const Variable* variable) const {
-    MathElementPtr neg_one = MathUtilities::NegativeOne();
-    MathElementPtr negative_variable = variable->Accept(neg_one->CreateMultiplicationVisitor());
-    return AddElementToOperand(negative_variable.get());
+    return AddNegation(variable);
 }
 
 MathElementPtr AdditionExpressionSubtractionVisitor::
 VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
-    MathElementPtr neg_one = MathUtilities::NegativeOne();
-    MathElementPtr negative_expression = expression->Accept(neg_one->CreateMultiplicationVisitor());
-    return AddElementToOperand(negative_expression.get());
+    return AddNegation(expression);
 }
 
 MathElementPtr AdditionExpressionSubtractionVisitor::
 VisitAdditionExpression(const AdditionExpression* expression) const {
-    MathElementPtr neg_one = MathUtilities::NegativeOne();
-    MathElementPtr negative_expression = expression->Accept(neg_one->CreateMultiplicationVisitor());
-    return negative_expression->Accept(operand_->CreateAdditionVisitor());
-}
-
-MathElementPtr AdditionExpressionSubtractionVisitor::
-AddElementToOperand(const MathElement* element) const {
-    std::vector<MathElementPtr> cloned_elements = operand_->ClonedElements();
-    cloned_elements.push_back(element->Clone());
-    return  MathElementPtr(new AdditionExpression(std::move(cloned_elements)));
+    return AddNegation(expression);
 }

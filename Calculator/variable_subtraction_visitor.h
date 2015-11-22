@@ -19,6 +19,8 @@ class VariableSubtractionVisitor : public Visitor {
 private:
     const Variable* operand_;
     
+    MathElementPtr AddNegation(const MathElement*) const;
+    
 public:
     VariableSubtractionVisitor(const Variable*);
     
@@ -26,5 +28,7 @@ public:
     MathElementPtr VisitDecimal(const Decimal*) const;
     MathElementPtr VisitFraction(const Fraction*) const;
     MathElementPtr VisitVariable(const Variable*) const;
+    MathElementPtr VisitMultiplicationExpression(const MultiplicationExpression*) const;
+    MathElementPtr VisitAdditionExpression(const AdditionExpression*) const;
 };
 #endif /* variable_subtraction_visitor_hpp */

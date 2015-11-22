@@ -8,4 +8,56 @@
 
 #include "multiplication_expression_subtraction_visitor.h"
 
-MultiplicationExpressionSubtractionVisitor::MultiplicationExpressionSubtractionVisitor(const MultiplicationExpression* operand) : operand_(operand) {}
+// -- PRIVATE FUNCTIONS -- //
+
+MathElementPtr MultiplicationExpressionSubtractionVisitor::
+AddNegation(const MathElement* element) const {
+    MathElementPtr negation = Multiply(MathUtilities::NegativeOne().get(), element);
+    return Add(operand_, negation.get());
+}
+
+// ++ PUBLIC FUNCTIONS ++ //
+
+// Constructor
+MultiplicationExpressionSubtractionVisitor::
+MultiplicationExpressionSubtractionVisitor(const MultiplicationExpression* operand)
+    : operand_(operand) {}
+
+// VISITOR FUNCTIONS //
+
+// Visit and Integer
+MathElementPtr MultiplicationExpressionSubtractionVisitor::
+VisitInteger(const Integer* integer) const {
+    return AddNegation(integer);
+}
+
+// Visit a Decimal
+MathElementPtr MultiplicationExpressionSubtractionVisitor::
+VisitDecimal(const Decimal* decimal) const {
+    double result_value = operand_->DoubleValue() - decimal->DoubleValue();
+    return MathElementPtr(new Decimal(result_value));
+}
+
+// Visit a Fraction
+MathElementPtr MultiplicationExpressionSubtractionVisitor::
+VisitFraction(const Fraction* fraction) const {
+    return AddNegation(fraction);
+}
+
+// Visit a Variable
+MathElementPtr MultiplicationExpressionSubtractionVisitor::
+VisitVariable(const Variable* variable) const {
+    return AddNegation(variable);
+}
+
+// Visit a MultiplicationExpression
+MathElementPtr MultiplicationExpressionSubtractionVisitor::
+VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
+    return AddNegation(expression);
+}
+
+// Visit an AdditionExpression
+MathElementPtr MultiplicationExpressionSubtractionVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    return AddNegation(expression);
+}

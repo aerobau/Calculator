@@ -8,20 +8,40 @@
 
 #include "variable_subtraction_visitor.h"
 
-VariableSubtractionVisitor::VariableSubtractionVisitor(const Variable* operand) : operand_(operand) {}
+// -- PRIVATE FUNCTIONS -- //
+
+MathElementPtr VariableSubtractionVisitor::AddNegation(const MathElement* element) const {
+    MathElementPtr negation = Multiply(MathUtilities::NegativeOne().get(), element);
+    return Add(operand_, negation.get());
+}
+
+// ++ PUBLIC FUNCTIONS ++ //
+
+VariableSubtractionVisitor::VariableSubtractionVisitor(const Variable* operand)
+    : operand_(operand) {}
 
 MathElementPtr VariableSubtractionVisitor::VisitInteger(const Integer* integer) const {
-    return MathElementPtr(nullptr);
+    return AddNegation(integer);
 }
 
 MathElementPtr VariableSubtractionVisitor::VisitDecimal(const Decimal* decimal) const {
-    return MathElementPtr(nullptr);
+    return AddNegation(decimal);
 }
 
 MathElementPtr VariableSubtractionVisitor::VisitFraction(const Fraction* fraction) const {
-    return MathElementPtr(nullptr);
+    return AddNegation(fraction);
 }
 
 MathElementPtr VariableSubtractionVisitor::VisitVariable(const Variable* variable) const {
-    return MathElementPtr(nullptr);
+    return AddNegation(variable);
+}
+
+MathElementPtr VariableSubtractionVisitor::
+VisitMultiplicationExpression(const MultiplicationExpression* expression) const {
+    return AddNegation(expression);
+}
+
+MathElementPtr VariableSubtractionVisitor::
+VisitAdditionExpression(const AdditionExpression* expression) const {
+    return AddNegation(expression);
 }
