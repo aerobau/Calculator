@@ -42,6 +42,15 @@ double Variable::DoubleValue() const {
     return 0.0;
 }
 
+MathElementPtr Variable::
+Exchange(const MathElement* old_element, const MathElement* new_element) const {
+    if (old_element->Accept(CreateEqualityVisitor())) {
+        return new_element->Clone();
+    } else {
+        return Clone();
+    }
+}
+
 std::string Variable::ToString() const {
     std::stringstream stream;
     stream << representation_;

@@ -45,6 +45,15 @@ bool Integer::Accept(const EqualityVisitorPtr visitor) const {
     return visitor->VisitInteger(this);
 }
 
+MathElementPtr Integer::
+Exchange(const MathElement* old_element, const MathElement* new_element) const {
+    if (old_element->Accept(CreateEqualityVisitor())) {
+        return new_element->Clone();
+    } else {
+      return Clone();
+    }
+}
+
 // REPRESENTATION CREATION METHODS // Return the double and std::string representations
 
 double Integer::DoubleValue() const {

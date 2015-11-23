@@ -56,6 +56,19 @@ bool AdditionExpression::Accept(const EqualityVisitorPtr visitor) const {
     return visitor->VisitAdditionExpression(this);
 }
 
+MathElementPtr AdditionExpression::
+Exchange(const MathElement* old_element, const MathElement* new_element) const {
+    if (old_element->Accept(CreateEqualityVisitor())) {
+        return new_element->Clone();
+    } else {
+        std::vector<MathElementPtr> new_elements = {};
+        for (int i = 0; i < elements_.size(); ++i) {
+            new_elements.push_back(elements_[i]->Exchange(old_element, new_element));
+        }
+        return MathElementPtr(new AdditionExpression(std::move(new_elements)));
+    }
+}
+
 // Common value methods
 
 double AdditionExpression::DoubleValue() const {

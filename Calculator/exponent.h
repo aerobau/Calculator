@@ -26,6 +26,7 @@ public:
     
     MathElementPtr Accept(const VisitorPtr) const;
     bool Accept(const EqualityVisitorPtr) const;
+    MathElementPtr Exchange(const MathElement*, const MathElement*) const;
     
     double DoubleValue() const;
     std::string ToString() const;

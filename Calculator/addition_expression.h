@@ -34,6 +34,7 @@ public:
     // Visitor acception methods
     MathElementPtr Accept(const VisitorPtr) const;
     bool Accept(const EqualityVisitorPtr) const;
+    MathElementPtr Exchange(const MathElement*, const MathElement*) const;
     
     // Common value methods
     double DoubleValue() const;

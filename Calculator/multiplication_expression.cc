@@ -46,6 +46,19 @@ bool MultiplicationExpression::Accept(const EqualityVisitorPtr visitor) const {
     return visitor->VisitMultiplicationExpression(this);
 }
 
+MathElementPtr MultiplicationExpression::
+Exchange(const MathElement* old_element, const MathElement* new_element) const {
+    if (old_element->Accept(CreateEqualityVisitor())) {
+        return new_element->Clone();
+    } else {
+        std::vector<MathElementPtr> new_elements = {};
+        for (int i = 0; i < elements_.size(); ++i) {
+            new_elements.push_back(elements_[i]->Exchange(old_element, new_element));
+        }
+        return MathElementPtr(new MultiplicationExpression(std::move(new_elements)));
+    }
+}
+
 
 double MultiplicationExpression::DoubleValue() const {
     double value = 1.0;

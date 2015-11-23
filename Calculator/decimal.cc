@@ -38,6 +38,15 @@ bool Decimal::Accept(const EqualityVisitorPtr visitor) const {
     return visitor->VisitDecimal(this);
 }
 
+MathElementPtr Decimal::
+Exchange(const MathElement* old_element, const MathElement* new_element) const {
+    if (old_element->Accept(CreateEqualityVisitor())) {
+        return new_element->Clone();
+    } else {
+        return Clone();
+    }
+}
+
 double Decimal::DoubleValue() const {
     return value_;
 }

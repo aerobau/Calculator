@@ -43,6 +43,18 @@ bool Fraction::Accept(const EqualityVisitorPtr visitor) const {
 
 
 
+MathElementPtr Fraction::
+Exchange(const MathElement* old_element, const MathElement* new_element) const {
+    if (old_element->Accept(CreateEqualityVisitor())) {
+        return new_element->Clone();
+    } else {
+        return MathElementPtr(new Fraction(numerator_->Exchange(old_element, new_element),
+                                           denominator_->Exchange(old_element, new_element)));
+    }
+}
+
+
+
 double Fraction::DoubleValue() const {
     return numerator_->DoubleValue() / denominator_ -> DoubleValue();
 }

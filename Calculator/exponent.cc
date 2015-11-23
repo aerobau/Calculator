@@ -45,6 +45,16 @@ bool Exponent::Accept(const EqualityVisitorPtr visitor) const {
     return false;
 }
 
+MathElementPtr Exponent::
+Exchange(const MathElement* old_element, const MathElement* new_element) const {
+    if (old_element->Accept(CreateEqualityVisitor())) {
+        return new_element->Clone();
+    } else {
+        return MathElementPtr(new Exponent(base_->Exchange(old_element, new_element),
+                                           exponent_->Exchange(old_element, new_element)));
+    }
+}
+
 double Exponent::DoubleValue() const {
     return pow(base_->DoubleValue(), exponent_->DoubleValue());
 }

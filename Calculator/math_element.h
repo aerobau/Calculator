@@ -24,6 +24,8 @@ class MathElement {
     virtual MathElementPtr Accept(const VisitorPtr) const = 0;
     virtual bool Accept(const EqualityVisitorPtr) const = 0;
     
+    virtual MathElementPtr Exchange(const MathElement*, const MathElement*) const = 0;
+    
     virtual double DoubleValue() const = 0;
     virtual std::string ToString() const = 0;
     
